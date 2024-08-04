@@ -6,7 +6,7 @@ body {
 }
 .v1_4 {
   width: 100%;
-  height: 1080px;
+  height: 1024px;
   background: rgba(255,255,255,1);
   opacity: 1;
   position: relative;
@@ -14,13 +14,35 @@ body {
   left: 0px;
   overflow: hidden;
 }
+.v1_6 {
+  width: 100%;
+  height: 163px;
+  background: rgba(255,212,44,1);
+  opacity: 1;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
 .v1_5 {
-  width: 906px;
-  color: rgba(0,0,0,1);
+  width: 793px;
+  color: rgba(255,148,0,1);
   position: absolute;
-  top: 393px;
-  left: 14px;
-  font-family: Inter;
+  top: 0px;
+  left: 11px;
+  font-family: Montserrat;
+  font-weight: Regular;
+  font-size: 128px;
+  opacity: 1;
+  text-align: left;
+}
+.v1_7 {
+  width: 379px;
+  color: rgba(255,148,0,1);
+  position: absolute;
+  top: 868px;
+  left: 276px;
+  font-family: Montserrat;
   font-weight: Regular;
   font-size: 128px;
   opacity: 1;
