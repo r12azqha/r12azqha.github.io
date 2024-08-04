@@ -1,2 +1,2 @@
-# haiii
-welcome to my web :3c tihii
+# welcome :3c
+hiii and welcom to my page :3c
