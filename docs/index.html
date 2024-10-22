@@ -11,6 +11,8 @@
       align-items: center;
       height: 100vh;
       font-family: 'Montserrat', sans-serif;
+      flex-direction: column; /* Arrange items vertically */
+      gap: 10px;            /* Add spacing between items */
     }
 
     h1, p {
@@ -25,10 +27,27 @@
     .image {
       width: 100px; /* Set the desired square image width */
       height: 100px; /* Set the desired square image height */
+      margin-right: 20px; /* Add space between the image and the text */
     }
 
     .text {
       text-align: center;  /* Center text horizontally */
+    }
+
+    .button {
+      background-color: #fbc963; /* Your new color */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;  /* Match button font with page font */
+      font-weight: bold;     /* Make button text bolder */
     }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,13 +58,15 @@
   <div class="container">
     <div class="image">
       <img src="https://github.com/r12azqha/r12azqha.github.io/blob/main/images/20230514-b-etsy-PILLOWFIGHT-TRANS%20nR.png?raw=true" 
-           alt="SiKotakBuro logo"
-           style="max-width: 100px; max-height: 100px;"> 
+               alt="SiKotakBuro logo"
+               style="max-width: 100px; max-height: 100px;"> 
     </div> 
     <div class="text">
       <h1>SiKotakBuro</h1>
       <p>It's empty at the moment :(</p>
     </div>
   </div>
+
+  <a href="https://sikotakburo.carrd.co/" class="button">🦊 SiKotakBuro.carrd.co</a>
 </body>
 </html>
