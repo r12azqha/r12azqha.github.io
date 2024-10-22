@@ -11,15 +11,25 @@
       align-items: center;
       height: 100vh;
       font-family: 'Montserrat', sans-serif;
-      flex-direction: column; /* Arrange items vertically */
     }
 
-    h1 {
-      margin-bottom: 0;    /* Remove all bottom margin from h1 */
+    h1, p {
+      margin: 0; /* Remove all margins from heading and paragraph */
     }
 
-    p {
-      margin-top: 0;     /* Remove all top margin from p */
+    .container {
+      display: flex;
+      align-items: center; /* Align vertically */
+    }
+
+    .image {
+      width: 100px; /* Set the desired square image width */
+      height: 100px; /* Set the desired square image height */
+      margin-right: 20px; /* Add space between the image and the text */
+    }
+
+    .text {
+      text-align: center;  /* Center text horizontally */
     }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +37,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>SiKotakBuro</h1>
-  <p>It's empty at the moment..</p> 
+  <div class="container">
+    <div class="image">
+      <img src="buropfp.png" alt="SiKotakBuro logo"> </div> 
+    <div class="text">
+      <h1>SiKotakBuro</h1>
+      <p>It's empty at the moment :(</p>
+    </div>
+  </div>
 </body>
 </html>
