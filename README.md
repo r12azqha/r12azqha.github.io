@@ -1,2 +1,2 @@
 # :3c
-hiii and welcom to my page :3c
+i dont know exactly what im doing
