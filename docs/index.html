@@ -137,26 +137,33 @@
       }
 
       .buttons {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-        margin: 20px 0;
-      }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+  align-items: stretch;
+}
 
-      .buttons a {
-        background-color: #fbc963;
-        padding: 2px 10px;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        box-shadow: 5px 5px #f99c37;
-        transition: background-color 0.3s, color 0.3s;
-        flex: 1 1 calc(30% - 10px);
-        max-width: 125px;
-        font-size: 12px;
-      }
+.buttons a {
+  background-color: #fbc963;
+  padding: 2px 10px;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  box-shadow: 5px 5px #f99c37;
+  transition: background-color 0.3s, color 0.3s;
+  flex: 1 1 calc(33.33% - 10px); /* Adjust to fit 3 buttons per row */
+  max-width: 125px;
+  font-size: 12px;
+}
+
+@media (max-width: 600px) {
+  .buttons a {
+    flex: 1 1 calc(50% - 10px); /* Adjust for 2 buttons per row on smaller screens */
+  }
+}
 
       .buttons a:hover {
         background-color: #ffbe5c;
@@ -195,7 +202,7 @@
 
     <div class="container">
       <div class="text-group">
-        <h1>r12azqha // @r_12k.</h1>
+        <h1>r12azqha</h1>
         <div class="social-icons">
           <a href="https://www.youtube.com/@r_12k.Incredibox" target="_blank">
             <svg
