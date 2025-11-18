@@ -506,7 +506,7 @@
       (function () {
         const repo = "r12azqha/r12azqha.github.io";
 
-        const deployFetch = fetch(
+        const fetchDeploy = fetch(
           `https://api.github.com/repos/${repo}/commits?per_page=1`
         ).then((res) => {
           const link = res.headers.get("Link");
@@ -517,17 +517,85 @@
           return "???";
         });
 
-        const hashFetch = fetch(
+        const fetchCommit = fetch(
           `https://api.github.com/repos/${repo}/commits/main`
         )
           .then((res) => res.json())
-          .then((data) => (data.sha ? data.sha.substring(0, 7) : "unknown"));
+          .then((data) => {
+            if (!data.sha)
+              return { hash: "unknown", date: new Date(), position: 0 };
+            const commitDate = new Date(data.commit.author.date);
 
-        Promise.allSettled([deployFetch, hashFetch]).then((results) => {
+            // Fetch commits of the same week to determine letter
+            return fetch(
+              `https://api.github.com/repos/${repo}/commits?since=${new Date(
+                commitDate.getFullYear(),
+                0,
+                1
+              ).toISOString()}&until=${commitDate.toISOString()}`
+            )
+              .then((res) => res.json())
+              .then((allCommits) => {
+                const year = commitDate.getFullYear();
+                const week = Math.ceil(
+                  ((commitDate - new Date(year, 0, 1)) / 86400000 +
+                    new Date(year, 0, 1).getDay() +
+                    1) /
+                    7
+                );
+                const weekStr = String(week).padStart(2, "0");
+
+                // Filter commits in the same week
+                const sameWeekCommits = allCommits.filter((c) => {
+                  const d = new Date(c.commit.author.date);
+                  const w = Math.ceil(
+                    ((d - new Date(d.getFullYear(), 0, 1)) / 86400000 +
+                      new Date(d.getFullYear(), 0, 1).getDay() +
+                      1) /
+                      7
+                  );
+                  return d.getFullYear() === year && w === week;
+                });
+
+                // Get letter based on position in same week
+                const letter = String.fromCharCode(
+                  97 + (sameWeekCommits.length - 1)
+                ); // 'a' for first commit
+                return {
+                  hash: data.sha.substring(0, 7),
+                  date: commitDate,
+                  letter: letter,
+                };
+              });
+          });
+
+        Promise.allSettled([fetchDeploy, fetchCommit]).then((results) => {
           let deployNumber =
             results[0].status === "fulfilled" ? results[0].value : "???";
-          let hash =
-            results[1].status === "fulfilled" ? results[1].value : "LOCAL";
+          let hashInfo =
+            results[1].status === "fulfilled"
+              ? results[1].value
+              : { hash: "LOCAL", date: new Date(), letter: "" };
+          let hash = hashInfo.hash;
+
+          // Version format ZZwYY + letter
+          let version = "";
+          try {
+            const commitDate = hashInfo.date;
+            const year = String(commitDate.getFullYear()).slice(-2);
+            const week = Math.ceil(
+              ((commitDate - new Date(commitDate.getFullYear(), 0, 1)) /
+                86400000 +
+                new Date(commitDate.getFullYear(), 0, 1).getDay() +
+                1) /
+                7
+            );
+            const weekStr = String(week).padStart(2, "0");
+            const letter = hashInfo.letter || "a";
+            version = `${year}w${weekStr}${letter}`;
+          } catch (e) {
+            version = "??w??";
+          }
 
           let errorNote = "";
           if (
@@ -538,7 +606,7 @@
           }
 
           document.getElementById("footer-info").innerHTML =
-            `DEPLOY: #${deployNumber} &bull; HASH: ${hash}` +
+            `DEPLOY: #${deployNumber} &bull; HASH: ${hash} &bull; VERSION: ${version}` +
             (errorNote ? " &bull; " + errorNote : "");
         });
       })();
