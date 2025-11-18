@@ -158,6 +158,18 @@
         margin: 20px;
       }
 
+      /* Make social icons smaller on small screens */
+      @media (max-width: 600px) {
+        .social-icons a svg {
+          width: 28px;
+          height: 28px;
+        }
+        .social-icons img {
+          width: 22px;
+          margin: 10px;
+        }
+      }
+
       .buttons {
       display: flex;
       flex-wrap: wrap;
@@ -179,6 +191,10 @@
         flex: 1 1 calc(33.33% - 10px); /* Adjust to fit 3 buttons per row */
         max-width: 125px;
         font-size: 12px;
+        height: 28px; /* Fixed height, matches original height from padding and font-size */
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       .buttons a:hover {
         background-color: #ffbe5c;
@@ -429,7 +445,5 @@
         document.querySelector('.social-icons').addEventListener('mouseleave', resetScale);
       })();
     </script>
-  </div>
-</div>
-</body>
-</html>
+    </body>
+  </html>
