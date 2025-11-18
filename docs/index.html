@@ -195,6 +195,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        min-width: 0;
+        font-size: clamp(8px, 2vw, 11px); /* Shrink text more if needed */
       }
       .buttons a:hover {
         background-color: #ffbe5c;
