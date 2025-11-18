@@ -70,19 +70,25 @@
         box-sizing: border-box;
       }
 
+      html, body {
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
       body {
         font-family: "FOT Seurat Pro", "Montserrat", Arial, sans-serif;
-        background: url("https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/bg1.png?raw=true")
-          no-repeat center center fixed;
-        background-size: cover; /* Ensures the background image covers the entire screen */
+        background: url("https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/bg1.png?raw=true") no-repeat center center fixed;
+        background-size: cover;
         color: #e0d5d5;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
         text-align: center;
         position: relative;
-        overflow: hidden;
+        min-height: 100vh;
+        min-width: 100vw;
       }
 
       /* Background text styling */
