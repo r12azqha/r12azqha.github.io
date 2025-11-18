@@ -506,42 +506,41 @@
       (function () {
         const repo = "r12azqha/r12azqha.github.io";
 
-        let deployNumber = "???";
-        let hash = "???";
-        let errorNote = "failed to fetch the api! (╥﹏╥)";
+        const deployFetch = fetch(
+          `https://api.github.com/repos/${repo}/commits?per_page=1`
+        ).then((res) => {
+          const link = res.headers.get("Link");
+          if (link) {
+            const match = link.match(/page=(\d+)>; rel="last"/);
+            return match ? match[1] : "unknown";
+          }
+          return "???";
+        });
 
-        // Step 1: fetch deploy number
-        fetch(`https://api.github.com/repos/${repo}/commits?per_page=1`)
-          .then((res) => {
-            const link = res.headers.get("Link");
-            if (link) {
-              const match = link.match(/page=(\d+)>; rel="last"/);
-              deployNumber = match ? match[1] : "unknown";
-            }
-          })
-          .catch((err) => {
-            console.warn("Failed to fetch deploy number", err);
-            errorNote = "⚠ Could not fetch deploy number";
-          })
-          .finally(() => {
-            // Step 2: fetch latest commit hash
-            fetch(`https://api.github.com/repos/${repo}/commits/main`)
-              .then((r) => r.json())
-              .then((data) => {
-                if (data.sha) hash = data.sha.substring(0, 7);
-              })
-              .catch((err) => {
-                console.warn("Failed to fetch commit hash", err);
-                errorNote +=
-                  (errorNote ? " &bull; " : "") + "⚠ Could not fetch hash";
-              })
-              .finally(() => {
-                // Update footer
-                document.getElementById("footer-info").innerHTML =
-                  `DEPLOY: #${deployNumber} &bull; HASH: ${hash}` +
-                  (errorNote ? " &bull; " + errorNote : "");
-              });
-          });
+        const hashFetch = fetch(
+          `https://api.github.com/repos/${repo}/commits/main`
+        )
+          .then((res) => res.json())
+          .then((data) => (data.sha ? data.sha.substring(0, 7) : "unknown"));
+
+        Promise.allSettled([deployFetch, hashFetch]).then((results) => {
+          let deployNumber =
+            results[0].status === "fulfilled" ? results[0].value : "???";
+          let hash =
+            results[1].status === "fulfilled" ? results[1].value : "LOCAL";
+
+          let errorNote = "";
+          if (
+            results[0].status === "rejected" ||
+            results[1].status === "rejected"
+          ) {
+            errorNote = "failed to fetch the api! (╥﹏╥)";
+          }
+
+          document.getElementById("footer-info").innerHTML =
+            `DEPLOY: #${deployNumber} &bull; HASH: ${hash}` +
+            (errorNote ? " &bull; " + errorNote : "");
+        });
       })();
 
       // MacOS dock-like proximity scaling for social icons
