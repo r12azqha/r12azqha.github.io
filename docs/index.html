@@ -142,6 +142,9 @@
         color: transparent;
         margin: 0 6px;
       }
+      .social-icons a svg {
+        transition: transform 0.38s cubic-bezier(0.22, 1.5, 0.36, 1);
+      }
 
       .social-icons img {
         
@@ -166,10 +169,15 @@
         border-radius: 5px;
         font-weight: bold;
         box-shadow: 5px 5px #f99c37;
-        transition: background-color 0.3s, color 0.3s;
+        transition: background-color 0.3s, color 0.3s, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         flex: 1 1 calc(33.33% - 10px); /* Adjust to fit 3 buttons per row */
         max-width: 125px;
         font-size: 12px;
+      }
+      .buttons a:hover {
+        background-color: #ffbe5c;
+        color: #ffffff;
+        transform: rotate(5deg);
       }
 
 @media (max-width: 600px) {
@@ -199,13 +207,16 @@
       }
 
       .glass-frame {
-        background: rgba(34, 28, 28, 0.3); /* Slightly darker semi-transparent white */
-        border-radius: 5px; /* Sharper corners */
-        padding: 20px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(32, 32, 32, 0.4);
+        background: rgba(42, 25, 29, 0.7); /* More transparent for glass effect */
+        border-radius: 18px;
+        padding: 32px 24px;
+        box-shadow: 0 8px 32px 0 rgba(42, 25, 29, 0.7);
+        backdrop-filter: blur(18px) saturate(160%);
+        -webkit-backdrop-filter: blur(18px) saturate(160%);
+        border: 1.5px solid rgba(42, 25, 29, 0.7);
+        outline: 1.5px solid rgba(42, 25, 29, 0.7);
+        outline-offset: -6px;
+        transition: background 0.3s, box-shadow 0.3s;
       }
 
       .content-wrapper {
@@ -278,7 +289,7 @@
             <div class="text-group">
               <h1>r12azqha</h1>
               <div class="social-icons">
-                <a href="https://www.youtube.com/@r_12k.Incredibox" target="_blank">
+                <a class="dock-icon" href="https://www.youtube.com/@r_12k.Incredibox" target="_blank">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="40"
@@ -292,7 +303,7 @@
                     />
                   </svg>
                 </a>
-                <a href="https://r12azqha.itch.io/" target="_blank">
+                <a class="dock-icon" href="https://r12azqha.itch.io/" target="_blank">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="40"
@@ -306,7 +317,7 @@
                   />
                 </svg>
               </a>
-              <a href="https://github.com/r12azqha/" target="_blank">
+              <a class="dock-icon" href="https://github.com/r12azqha/" target="_blank">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="40"
@@ -320,7 +331,7 @@
                   />
                 </svg>
               </a>
-              <a href="mailto:business@r12azqha.com" target="_blank">
+              <a class="dock-icon" href="mailto:business@r12azqha.com" target="_blank">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="40"
@@ -334,7 +345,7 @@
               />
             </svg>
           </a>
-          <a href="https://www.instagram.com/r12azqha" target="_blank">
+          <a class="dock-icon" href="https://www.instagram.com/r12azqha" target="_blank">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="40"
@@ -366,6 +377,52 @@
         />
       </a>
     </div>
+    <script>
+      // MacOS dock-like proximity scaling for social icons
+      (function() {
+        const iconLinks = Array.from(document.querySelectorAll('.social-icons .dock-icon'));
+        const icons = iconLinks.map(link => link.querySelector('svg'));
+        if (!icons.length) return;
+        const minScale = 1;
+        const midScale = 1.0;
+        const neighborScale = 1.1;
+        const maxScale = 1.5;
+        function handleMove(e) {
+          const mouseX = e.clientX;
+          let closestIdx = -1;
+          let minDist = Infinity;
+          icons.forEach((icon, i) => {
+            const rect = icon.getBoundingClientRect();
+            const iconX = rect.left + rect.width / 2;
+            const dist = Math.abs(mouseX - iconX);
+            if (dist < minDist) {
+              minDist = dist;
+              closestIdx = i;
+            }
+          });
+          icons.forEach((icon, i) => {
+            let scale = minScale;
+            let rotate = '';
+            if (i === closestIdx) {
+              scale = maxScale;
+              rotate = 'rotate(5deg)';
+            } else if (i === closestIdx - 1 || i === closestIdx + 1) {
+              scale = neighborScale;
+            } else if (i === closestIdx - 2 || i === closestIdx + 2) {
+              scale = midScale;
+            }
+            icon.style.transform = `scale(${scale}) ${rotate}`;
+          });
+        }
+        function resetScale() {
+          icons.forEach((icon) => {
+            icon.style.transform = `scale(${minScale})`;
+          });
+        }
+        document.querySelector('.social-icons').addEventListener('mousemove', handleMove);
+        document.querySelector('.social-icons').addEventListener('mouseleave', resetScale);
+      })();
+    </script>
   </div>
 </div>
 </body>
