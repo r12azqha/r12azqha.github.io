@@ -58,92 +58,321 @@
       content="https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/bg1.png?raw=true"
     />
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Font Loading and Custom Config -->
     <style>
+      .container {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Media query for mobile devices */
+      @media screen and (max-width: 768px) {
+        .youtube-video {
+          position: fixed; /* Fixed position on mobile */
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 300px; /* Adjust the height for mobile if needed */
+          opacity: 1; /* Make it visible on mobile */
+          z-index: 1; /* Keep it behind content */
+        }
+
+        .container {
+          position: relative;
+          padding-top: 220px; /* Add padding to make space for the video at the top */
+        }
+
+        /* Adjust footer for mobile so it doesn't overlap content if screen is small */
+        .footer {
+          padding-bottom: 10px;
+        }
+      }
+
       @font-face {
         font-family: "FOT Seurat Pro";
         src: url("https://raw.githubusercontent.com/r12azqha/r12azqha.github.io/main/docs/fonts/Arco.otf")
           format("opentype");
         font-weight: normal;
       }
-      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
-      @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap");
-    </style>
 
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              main: ['"FOT Seurat Pro"', '"Montserrat"', "Arial", "sans-serif"],
-              mono: ['"JetBrains Mono"', '"Montserrat"', "monospace"],
-            },
-            colors: {
-              bgDark: "rgba(42, 25, 29, 0.7)",
-              textLight: "#e0d5d5",
-              orangeTitle: "#ffa54d",
-              btnYellow: "#fbc963",
-              btnHover: "#ffbe5c",
-              btnShadow: "#f99c37",
-              divider: "#e0cfc6",
-            },
-            transitionTimingFunction: {
-              "dock-bounce": "cubic-bezier(0.22, 1.5, 0.36, 1)",
-              "btn-bounce": "cubic-bezier(0.4, 0, 0.2, 1)",
-            },
-          },
-        },
-      };
-    </script>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"); /* Added Mono font for footer */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      body {
+        font-family: "FOT Seurat Pro", "Montserrat", Arial, sans-serif;
+        background: url("https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/bg1.png?raw=true")
+          no-repeat center center fixed;
+        background-size: cover;
+        color: #e0d5d5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        min-height: 100vh;
+        min-width: 100vw;
+      }
+
+      /* Background text styling */
+      .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(42, 25, 29, 0.7); /* Semi-transparent overlay */
+        overflow: hidden;
+        z-index: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .background-text {
+        font-size: 36px;
+        font-family: "FOT Seurat Pro", "Montserrat", sans-serif;
+        font-weight: bold;
+        color: rgba(11, 18, 87, 0); /* Light, transparent text */
+        white-space: nowrap;
+        transform: rotate(-6deg); /* Rotate the text */
+        text-transform: uppercase;
+      }
+
+      .container {
+        z-index: 1;
+        max-width: 800px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 20px;
+      }
+
+      .text-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        font-size: 48px;
+        margin: 20px 0;
+        color: #ffa54d;
+        font-weight: normal;
+      }
+
+      .social-icons a {
+        display: inline-block;
+        padding: 0;
+        border: none;
+        background: none;
+        text-decoration: none;
+        color: transparent;
+        margin: 0 6px;
+      }
+      .social-icons a svg {
+        transition: transform 0.38s cubic-bezier(0.22, 1.5, 0.36, 1);
+      }
+
+      .social-icons img {
+        width: 30px;
+        margin: 20px;
+      }
+
+      /* Make social icons smaller on small screens */
+      @media (max-width: 600px) {
+        .social-icons a svg {
+          width: 28px;
+          height: 28px;
+        }
+        .social-icons img {
+          width: 22px;
+          margin: 10px;
+        }
+      }
+
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin: 20px 0;
+        align-items: stretch;
+      }
+
+      .buttons a {
+        background-color: #fbc963;
+        padding: 2px 10px;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        box-shadow: 5px 5px #f99c37;
+        transition: background-color 0.3s, color 0.3s,
+          transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        flex: 1 1 calc(33.33% - 10px); /* Adjust to fit 3 buttons per row */
+        max-width: 125px;
+        font-size: 12px;
+        height: 28px; /* Fixed height, matches original height from padding and font-size */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        min-width: 0;
+        font-size: clamp(8px, 2vw, 11px); /* Shrink text more if needed */
+      }
+      .buttons a:hover {
+        background-color: #ffbe5c;
+        color: #ffffff;
+        transform: rotate(5deg);
+      }
+
+      @media (max-width: 600px) {
+        .buttons a {
+          flex: 1 1 calc(50% - 10px); /* Adjust for 2 buttons per row on smaller screens */
+        }
+      }
+
+      .buttons a:hover {
+        background-color: #ffbe5c;
+        color: #ffffff;
+      }
+
+      .character-image {
+        width: 150px;
+        margin-left: 50px;
+        margin-top: 20px;
+      }
+
+      .divider {
+        border: none; /* Remove default border */
+        height: 1px; /* Line thickness */
+        background-color: #e0cfc6; /* Line color */
+        margin: 5px 0; /* Space above and below the line */
+        width: 80%; /* Adjust width as needed */
+        align-self: center; /* Centers the line in the container */
+      }
+
+      .glass-frame {
+        background: rgba(
+          42,
+          25,
+          29,
+          0.7
+        ); /* More transparent for glass effect */
+        border-radius: 18px;
+        padding: 32px 24px;
+        box-shadow: 0 8px 32px 0 rgba(42, 25, 29, 0.7);
+        backdrop-filter: blur(18px) saturate(160%);
+        -webkit-backdrop-filter: blur(18px) saturate(160%);
+        border: 1.5px solid rgba(42, 25, 29, 0.7);
+        outline: 1.5px solid rgba(42, 25, 29, 0.7);
+        outline-offset: -6px;
+        transition: background 0.3s, box-shadow 0.3s;
+      }
+
+      .content-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 20px; /* Adjust the gap as needed */
+      }
+
+      .video-container {
+        flex: 1;
+        position: relative;
+        transform: translateY(5%);
+        width: 500px; /* Fixed width */
+        max-width: 100%;
+        height: 310px; /* 16:9 Aspect Ratio */
+        overflow: hidden;
+      }
+
+      .youtube-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .text-container {
+        flex: 1;
+        padding: 0 15px;
+      }
+
+      /* ---- FOOTER STYLES ---- */
+      .footer {
+        position: absolute;
+        bottom: 15px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-family: "JetBrains Mono", "Montserrat", monospace;
+        font-size: 10px;
+        color: rgba(224, 213, 213, 0.4);
+        z-index: 10;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        pointer-events: none; /* Allows clicking through the footer area */
+      }
+
+      @media screen and (max-width: 768px) {
+        .content-wrapper {
+          flex-direction: column;
+          align-items: center;
+          gap: 30px;
+        }
+
+        .video-container {
+          width: 100%;
+          padding-bottom: 56.25%; /* Maintains aspect ratio on mobile */
+        }
+
+        .youtube-video {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    </style>
   </head>
 
-  <!-- UPDATED: Changed 'items-center' to 'items-start md:items-center' to stop mobile content from floating in the middle -->
-  <!-- UPDATED: Added 'overflow-y-auto' for mobile scrolling -->
-  <body
-    class="h-screen w-screen m-0 p-0 overflow-y-auto md:overflow-hidden font-main text-textLight flex justify-center items-start md:items-center text-center relative min-h-screen min-w-[100vw] bg-cover bg-center bg-no-repeat bg-fixed"
-    style="
-      background-image: url('https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/bg1.png?raw=true');
-    "
-  >
-    <!-- Glass Frame -->
-    <!-- UPDATED: Removed py-8 on mobile (now md:py-8) to remove gap between fixed video and card top -->
-    <div
-      class="bg-bgDark rounded-[18px] px-6 py-0 md:py-8 shadow-[0_8px_32px_0_rgba(42,25,29,0.7)] backdrop-blur-[18px] backdrop-saturate-[160%] border-[1.5px] border-bgDark outline outline-[1.5px] outline-bgDark outline-offset-[-6px] transition-all duration-300 w-full md:w-auto min-h-screen md:min-h-0"
-    >
-      <!-- Content Wrapper: Flex col on mobile, row on desktop -->
-      <div
-        class="flex flex-col md:flex-row items-center md:items-start gap-[30px] md:gap-5"
-      >
-        <!-- Video Container -->
-        <!-- Mobile: Fixed to top. Desktop: Flex item inside card -->
-        <div
-          class="video-container flex-1 md:w-[500px] md:max-w-full md:aspect-video md:h-auto overflow-hidden relative md:translate-y-[5%] w-full aspect-video md:pb-0 md:static fixed top-0 left-0 h-auto z-[20]"
-        >
+  <body>
+    <div class="glass-frame">
+      <div class="content-wrapper">
+        <div class="video-container">
           <iframe
-            class="youtube-video absolute top-0 left-0 w-full h-full border-none md:static"
+            class="youtube-video"
             src="https://www.youtube.com/embed/I0jHbsidh1g?autoplay=1&mute=0&loop=1&playlist=I0jHbsidh1g"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
           ></iframe>
         </div>
-
-        <!-- Text Container -->
-        <!-- Mobile: Padding top added to clear the fixed video -->
-        <div class="text-container flex-1 px-[15px] relative z-[1]">
-          <!-- UPDATED: Changed pt-[58vw] to pt-[56.25vw] (exact 16:9 ratio) so text starts exactly after video -->
-          <div>
-            <div class="text-group flex flex-col items-center w-full">
-              <h1 class="text-5xl my-5 text-orangeTitle font-normal">
-                r12azqha
-              </h1>
-
-              <div class="social-icons flex justify-center">
+        <div class="text-container">
+          <div class="container">
+            <div class="text-group">
+              <h1>r12azqha</h1>
+              <div class="social-icons">
                 <a
-                  class="dock-icon inline-block p-0 border-none bg-none no-underline text-transparent mx-[6px]"
+                  class="dock-icon"
                   href="https://www.youtube.com/@r_12k.Incredibox"
                   target="_blank"
                 >
@@ -152,7 +381,7 @@
                     width="40"
                     height="40"
                     fill="#E0CFC6"
-                    class="bi bi-youtube transition-transform duration-[380ms] ease-dock-bounce w-[28px] h-[28px] md:w-[40px] md:h-[40px]"
+                    class="bi bi-youtube"
                     viewBox="0 0 16 16"
                   >
                     <path
@@ -161,7 +390,7 @@
                   </svg>
                 </a>
                 <a
-                  class="dock-icon inline-block p-0 border-none bg-none no-underline text-transparent mx-[6px]"
+                  class="dock-icon"
                   href="https://r12azqha.itch.io/"
                   target="_blank"
                 >
@@ -171,7 +400,6 @@
                     width="40"
                     fill="#E0CFC6"
                     viewBox="0 0 245.371 220.736"
-                    class="transition-transform duration-[380ms] ease-dock-bounce w-[28px] h-[28px] md:w-[40px] md:h-[40px]"
                   >
                     <path
                       d="M31.99 1.365C21.287 7.72.2 31.945 0 38.298v10.516C0 62.144 12.46 73.86 23.773 73.86c13.584 0 24.902-11.258 24.903-24.62 0 13.362 10.93 24.62 24.515 24.62 13.586 0 24.165-11.258 24.165-24.62 0 13.362 11.622 24.62 25.207 24.62h.246c13.586 0 25.208-11.258 25.208-24.62 0 13.362 10.58 24.62 24.164 24.62 13.585 0 24.515-11.258 24.515-24.62 0 13.362 11.32 24.62 24.903 24.62 11.313 0 23.773-11.714 23.773-25.046V38.298c-.2-6.354-21.287-30.58-31.988-36.933C180.118.197 157.056-.005 122.685 0c-34.37.003-81.228.54-90.697 1.365zm65.194 66.217a28.025 28.025 0 0 1-4.78 6.155c-5.128 5.014-12.157 8.122-19.906 8.122a28.482 28.482 0 0 1-19.948-8.126c-1.858-1.82-3.27-3.766-4.563-6.032l-.006.004c-1.292 2.27-3.092 4.215-4.954 6.037a28.5 28.5 0 0 1-19.948 8.12c-.934 0-1.906-.258-2.692-.528-1.092 11.372-1.553 22.24-1.716 30.164l-.002.045c-.02 4.024-.04 7.333-.06 11.93.21 23.86-2.363 77.334 10.52 90.473 19.964 4.655 56.7 6.775 93.555 6.788h.006c36.854-.013 73.59-2.133 93.554-6.788 12.883-13.14 10.31-66.614 10.52-90.474-.022-4.596-.04-7.905-.06-11.93l-.003-.045c-.162-7.926-.623-18.793-1.715-30.165-.786.27-1.757.528-2.692.528a28.5 28.5 0 0 1-19.948-8.12c-1.862-1.822-3.662-3.766-4.955-6.037l-.006-.004c-1.294 2.266-2.705 4.213-4.563 6.032a28.48 28.48 0 0 1-19.947 8.125c-7.748 0-14.778-3.11-19.906-8.123a28.025 28.025 0 0 1-4.78-6.155 27.99 27.99 0 0 1-4.736 6.155 28.49 28.49 0 0 1-19.95 8.124c-.27 0-.54-.012-.81-.02h-.007c-.27.008-.54.02-.813.02a28.49 28.49 0 0 1-19.95-8.123 27.992 27.992 0 0 1-4.736-6.155zm-20.486 26.49l-.002.01h.015c8.113.017 15.32 0 24.25 9.746 7.028-.737 14.372-1.105 21.722-1.094h.006c7.35-.01 14.694.357 21.723 1.094 8.93-9.747 16.137-9.73 24.25-9.746h.014l-.002-.01c3.833 0 19.166 0 29.85 30.007L210 165.244c8.504 30.624-2.723 31.373-16.727 31.4-20.768-.773-32.267-15.855-32.267-30.935-11.496 1.884-24.907 2.826-38.318 2.827h-.006c-13.412 0-26.823-.943-38.318-2.827 0 15.08-11.5 30.162-32.267 30.935-14.004-.027-25.23-.775-16.726-31.4L46.85 124.08C57.534 94.073 72.867 94.073 76.7 94.073zm45.985 23.582v.006c-.02.02-21.863 20.08-25.79 27.215l14.304-.573v12.474c0 .584 5.74.346 11.486.08h.006c5.744.266 11.485.504 11.485-.08v-12.474l14.304.573c-3.928-7.135-25.79-27.215-25.79-27.215v-.006l-.003.002z"
@@ -180,7 +408,7 @@
                   </svg>
                 </a>
                 <a
-                  class="dock-icon inline-block p-0 border-none bg-none no-underline text-transparent mx-[6px]"
+                  class="dock-icon"
                   href="https://github.com/r12azqha/"
                   target="_blank"
                 >
@@ -189,7 +417,7 @@
                     width="40"
                     height="40"
                     fill="#E0CFC6"
-                    class="bi bi-github transition-transform duration-[380ms] ease-dock-bounce w-[28px] h-[28px] md:w-[40px] md:h-[40px]"
+                    class="bi bi-github"
                     viewBox="0 0 16 16"
                   >
                     <path
@@ -198,7 +426,7 @@
                   </svg>
                 </a>
                 <a
-                  class="dock-icon inline-block p-0 border-none bg-none no-underline text-transparent mx-[6px]"
+                  class="dock-icon"
                   href="mailto:business@r12azqha.com"
                   target="_blank"
                 >
@@ -207,7 +435,7 @@
                     width="40"
                     height="40"
                     fill="#E0CFC6"
-                    class="bi bi-discord transition-transform duration-[380ms] ease-dock-bounce w-[28px] h-[28px] md:w-[40px] md:h-[40px]"
+                    class="bi bi-discord"
                     viewBox="0 0 16 16"
                   >
                     <path
@@ -216,7 +444,7 @@
                   </svg>
                 </a>
                 <a
-                  class="dock-icon inline-block p-0 border-none bg-none no-underline text-transparent mx-[6px]"
+                  class="dock-icon"
                   href="https://www.instagram.com/r12azqha"
                   target="_blank"
                 >
@@ -225,7 +453,7 @@
                     width="40"
                     height="40"
                     fill="#E0CFC6"
-                    class="bi bi-instagram transition-transform duration-[380ms] ease-dock-bounce w-[28px] h-[28px] md:w-[40px] md:h-[40px]"
+                    class="bi bi-instagram"
                     viewBox="0 0 16 16"
                   >
                     <path
@@ -234,67 +462,43 @@
                   </svg>
                 </a>
               </div>
-
-              <!-- Divider -->
-              <hr
-                class="h-px bg-divider w-4/5 self-center my-[5px] border-none"
-              />
-
-              <!-- Buttons -->
-              <div
-                class="buttons flex flex-wrap justify-center gap-[15px] my-5 items-stretch"
-              >
+              <hr class="divider" />
+              <div class="buttons">
                 <a
                   href="https://www.youtube.com/@r_12k.Incredibox"
                   target="_blank"
-                  class="bg-btnYellow px-[10px] py-[2px] text-white no-underline rounded-[5px] font-bold shadow-[5px_5px_#f99c37] transition-all duration-300 ease-btn-bounce flex-auto min-w-0 max-w-[125px] h-7 text-[12px] md:text-[11px] text-[clamp(8px,2vw,11px)] flex items-center justify-center overflow-hidden whitespace-nowrap text-ellipsis hover:bg-btnHover hover:text-white hover:rotate-[5deg] basis-[calc(50%-10px)] md:basis-[calc(33.33%-10px)]"
                   >📺 YouTube</a
                 >
-                <a
-                  href="https://r12azqha.itch.io/"
-                  target="_blank"
-                  class="bg-btnYellow px-[10px] py-[2px] text-white no-underline rounded-[5px] font-bold shadow-[5px_5px_#f99c37] transition-all duration-300 ease-btn-bounce flex-auto min-w-0 max-w-[125px] h-7 text-[12px] md:text-[11px] text-[clamp(8px,2vw,11px)] flex items-center justify-center overflow-hidden whitespace-nowrap text-ellipsis hover:bg-btnHover hover:text-white hover:rotate-[5deg] basis-[calc(50%-10px)] md:basis-[calc(33.33%-10px)]"
+                <a href="https://r12azqha.itch.io/" target="_blank"
                   >🎮 Itch.io</a
                 >
-                <a
-                  href="https://github.com/r12azqha/"
-                  target="_blank"
-                  class="bg-btnYellow px-[10px] py-[2px] text-white no-underline rounded-[5px] font-bold shadow-[5px_5px_#f99c37] transition-all duration-300 ease-btn-bounce flex-auto min-w-0 max-w-[125px] h-7 text-[12px] md:text-[11px] text-[clamp(8px,2vw,11px)] flex items-center justify-center overflow-hidden whitespace-nowrap text-ellipsis hover:bg-btnHover hover:text-white hover:rotate-[5deg] basis-[calc(50%-10px)] md:basis-[calc(33.33%-10px)]"
+                <a href="https://github.com/r12azqha/" target="_blank"
                   >💻 GitHub</a
                 >
-                <a
-                  href="mailto:business@r12azqha.com"
-                  target="_blank"
-                  class="bg-btnYellow px-[10px] py-[2px] text-white no-underline rounded-[5px] font-bold shadow-[5px_5px_#f99c37] transition-all duration-300 ease-btn-bounce flex-auto min-w-0 max-w-[125px] h-7 text-[12px] md:text-[11px] text-[clamp(8px,2vw,11px)] flex items-center justify-center overflow-hidden whitespace-nowrap text-ellipsis hover:bg-btnHover hover:text-white hover:rotate-[5deg] basis-[calc(50%-10px)] md:basis-[calc(33.33%-10px)]"
+                <a href="mailto:business@r12azqha.com" target="_blank"
                   >📩 Email</a
                 >
                 <a
                   href="https://www.instagram.com/r12azqha/?hl=id"
                   target="_blank"
-                  class="bg-btnYellow px-[10px] py-[2px] text-white no-underline rounded-[5px] font-bold shadow-[5px_5px_#f99c37] transition-all duration-300 ease-btn-bounce flex-auto min-w-0 max-w-[125px] h-7 text-[12px] md:text-[11px] text-[clamp(8px,2vw,11px)] flex items-center justify-center overflow-hidden whitespace-nowrap text-ellipsis hover:bg-btnHover hover:text-white hover:rotate-[5deg] basis-[calc(50%-10px)] md:basis-[calc(33.33%-10px)]"
                   >📸 Socials</a
                 >
               </div>
-
-              <!-- Character Image -->
-              <a href="https://blockyfoxburo.github.io">
-                <img
-                  src="https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/20250924-instagram-rua.ngtenang-c.png?raw=true"
-                  alt="Character"
-                  class="character-image w-[150px] mt-5"
-                />
-              </a>
             </div>
+            <a href="https://blockyfoxburo.github.io">
+              <img
+                src="https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/20250924-instagram-rua.ngtenang-c.png?raw=true"
+                alt="Character"
+                class="character-image"
+              />
+            </a>
           </div>
         </div>
       </div>
     </div>
 
     <!-- NEW FOOTER SECTION -->
-    <div
-      class="footer absolute bottom-[15px] left-0 w-full text-center font-mono text-[10px] text-white/40 z-10 tracking-widest uppercase pointer-events-none pb-[10px] md:pb-0"
-      id="footer-info"
-    >
+    <div class="footer" id="footer-info">
       Deploy: Loading... &bull; Hash: ...
     </div>
 
