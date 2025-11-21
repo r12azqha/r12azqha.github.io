@@ -24,444 +24,1755 @@
     />
 
     <title>@r_12k. | ✨ r12azqha Landing Page :3c</title>
-    <meta name="title" content="@r_12k. | ✨ r12azqha Landing Page :3c" />
-    <meta
-      name="description"
-      content="🍊 Yelloww! I am a Content Creator, Minecraft Animator, Graphics & Motion Designer, Game Developer, and more! 🎨🎮 (phew that was a lot..)"
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://r12azqha.com" />
-    <meta
-      property="og:title"
-      content="@r_12k. | ✨ r12azqha Landing Page :3c"
-    />
-    <meta
-      property="og:description"
-      content="🍊 Yelloww! I am a Content Creator, Minecraft Animator, Graphics & Motion Designer, Game Developer, and more! 🎨🎮 (phew that was a lot..)"
-    />
-    <meta
-      property="og:image"
-      content="https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/bg1.png?raw=true"
-    />
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://r12azqha.com" />
-    <meta
-      property="twitter:title"
-      content="@r_12k. | ✨ r12azqha Landing Page :3c"
-    />
-    <meta
-      property="twitter:description"
-      content="🍊 Yelloww! I am a Content Creator, Minecraft Animator, Graphics & Motion Designer, Game Developer, and more! 🎨🎮 (phew that was a lot..)"
-    />
-    <meta
-      property="twitter:image"
-      content="https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/bg1.png?raw=true"
-    />
-
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Font Loading and Custom Config -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-      @font-face {
-        font-family: "FOT Seurat Pro";
-        src: url("https://raw.githubusercontent.com/r12azqha/r12azqha.github.io/main/docs/fonts/Arco.otf")
-          format("opentype");
-        font-weight: normal;
+      @import url("https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap");
+
+      body {
+        font-family: "Segoe UI", sans-serif;
+        overflow: hidden;
+        user-select: none;
       }
-      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
-      @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap");
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.4);
+      }
+
+      /* Acrylic Glass Effect */
+      .acrylic {
+        background: rgba(32, 32, 40, 0.85);
+        backdrop-filter: blur(20px) saturate(120%);
+        -webkit-backdrop-filter: blur(20px) saturate(120%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      }
+
+      .acrylic-dark {
+        background: rgba(15, 15, 15, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .glass-panel {
+        background: rgba(32, 32, 40, 0.6);
+        backdrop-filter: blur(30px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Animations */
+      @keyframes popIn {
+        0% {
+          transform: scale(0.95);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        0% {
+          transform: translate(-50%, 20px);
+          opacity: 0;
+        }
+        100% {
+          transform: translate(-50%, 0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes scaleIn {
+        0% {
+          width: 0;
+          opacity: 0;
+          transform: scale(0.8);
+          margin-left: 0;
+          margin-right: 0;
+        }
+        100% {
+          width: 2.5rem;
+          opacity: 1;
+          transform: scale(1);
+          margin-left: 0.25rem;
+          margin-right: 0.25rem;
+        }
+      }
+
+      @keyframes scaleOut {
+        0% {
+          width: 2.5rem;
+          opacity: 1;
+          transform: scale(1);
+          margin-left: 0.25rem;
+          margin-right: 0.25rem;
+        }
+        100% {
+          width: 0;
+          opacity: 0;
+          transform: scale(0.8);
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+
+      @keyframes slideRightFade {
+        0% {
+          transform: translateX(-20px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .window-pop {
+        animation: popIn 0.15s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+      }
+      .start-pop {
+        animation: slideUp 0.2s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+      }
+      .taskbar-pop {
+        animation: scaleIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+      .app-exit {
+        animation: scaleOut 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .clock-slide {
+        animation: slideRightFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+
+      .window-minimized {
+        transform: scale(0.7) translateY(200px) !important;
+        opacity: 0 !important;
+        pointer-events: none;
+        transition: all 0.3s ease;
+      }
+
+      .window-maximized {
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 0 !important;
+        transform: none !important;
+      }
+
+      /* Taskbar & Start Menu */
+      .taskbar-item {
+        transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+      }
+      .taskbar-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-3px) scale(1.02);
+      }
+      .taskbar-item:active {
+        transform: scale(0.92) translateY(0) !important;
+        transition-duration: 0.15s;
+      }
+
+      .taskbar-item::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 3px;
+        background: #60cdff;
+        border-radius: 4px;
+        transition: width 0.2s ease;
+      }
+      .taskbar-item:hover::after {
+        width: 40%;
+      }
+      .taskbar-item.open::after {
+        width: 40%;
+        background: #ffffff;
+      }
+
+      /* Desktop Icon */
+      .desktop-icon {
+        position: absolute;
+        width: 96px;
+        height: 96px;
+        padding: 4px;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        z-index: 10;
+        border: 1px solid transparent;
+      }
+      .desktop-icon:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .desktop-icon.selected {
+        background-color: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .desktop-icon.dragging {
+        opacity: 0.8;
+        z-index: 9999 !important;
+        pointer-events: none;
+      }
+
+      /* Calendar Animation */
+      .calendar-slider {
+        transition: transform 0.3s ease-in-out;
+      }
+
+      /* Calendar Styles */
+      .calendar-day {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        border-radius: 50%;
+        cursor: default;
+      }
+      .calendar-day:hover:not(.empty) {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .calendar-day.today {
+        background: #0078d4;
+        color: white;
+        font-weight: bold;
+        border: 1px solid #60cdff;
+      }
+
+      /* Selection Box */
+      #selection-box {
+        position: absolute;
+        border: 1px solid rgba(0, 120, 212, 0.6);
+        background-color: rgba(0, 120, 212, 0.2);
+        display: none;
+        pointer-events: none;
+        z-index: 5;
+      }
+
+      /* Context Menu */
+      #context-menu {
+        z-index: 999999;
+        min-width: 200px;
+      }
+      .context-item {
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        cursor: default;
+        border-radius: 4px;
+      }
+      .context-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Resizer Handles */
+      .resizer {
+        position: absolute;
+        z-index: 50;
+      }
+      .resizer.n {
+        top: -5px;
+        left: 0;
+        right: 0;
+        height: 10px;
+        cursor: n-resize;
+      }
+      .resizer.s {
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        height: 10px;
+        cursor: s-resize;
+      }
+      .resizer.e {
+        top: 0;
+        bottom: 0;
+        right: -5px;
+        width: 10px;
+        cursor: e-resize;
+      }
+      .resizer.w {
+        top: 0;
+        bottom: 0;
+        left: -5px;
+        width: 10px;
+        cursor: w-resize;
+      }
+      .resizer.nw {
+        top: -5px;
+        left: -5px;
+        width: 15px;
+        height: 15px;
+        cursor: nw-resize;
+        z-index: 60;
+      }
+      .resizer.ne {
+        top: -5px;
+        right: -5px;
+        width: 15px;
+        height: 15px;
+        cursor: ne-resize;
+        z-index: 60;
+      }
+      .resizer.sw {
+        bottom: -5px;
+        left: -5px;
+        width: 15px;
+        height: 15px;
+        cursor: sw-resize;
+        z-index: 60;
+      }
+      .resizer.se {
+        bottom: -5px;
+        right: -5px;
+        width: 15px;
+        height: 15px;
+        cursor: se-resize;
+        z-index: 60;
+      }
+
+      /* Wallpaper */
+      .wallpaper {
+        background-image: url("https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/bg1.png?raw=true");
+        background-size: cover;
+        background-position: center;
+      }
     </style>
-
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              main: ['"FOT Seurat Pro"', '"Montserrat"', "Arial", "sans-serif"],
-              mono: ['"JetBrains Mono"', '"Montserrat"', "monospace"],
-            },
-            colors: {
-              bgDark: "rgba(42, 25, 29, 0.7)",
-              textLight: "#e0d5d5",
-              orangeTitle: "#ffa54d",
-              btnYellow: "#fbc963",
-              btnHover: "#ffbe5c",
-              btnShadow: "#f99c37",
-              divider: "#e0cfc6",
-            },
-            transitionTimingFunction: {
-              "dock-bounce": "cubic-bezier(0.22, 1.5, 0.36, 1)",
-              "btn-bounce": "cubic-bezier(0.4, 0, 0.2, 1)",
-            },
-          },
-        },
-      };
-    </script>
   </head>
-
   <body
-    class="h-screen w-screen m-0 p-0 overflow-y-auto md:overflow-hidden font-main text-textLight flex justify-center items-start md:items-center text-center relative min-h-screen min-w-[100vw] bg-cover bg-center bg-no-repeat bg-fixed"
-    style="
-      background-image: url('https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/bg1.png?raw=true');
-    "
+    class="h-screen w-screen text-white overflow-hidden wallpaper relative"
+    id="desktop-area"
   >
-    <!-- Glass Frame -->
+    <!-- Selection Box -->
+    <div id="selection-box"></div>
+
+    <!-- Context Menu -->
     <div
-      class="bg-bgDark rounded-[18px] px-6 py-0 md:py-8 shadow-[0_8px_32px_0_rgba(42,25,29,0.7)] backdrop-blur-[18px] backdrop-saturate-[160%] border-[1.5px] border-bgDark outline outline-[1.5px] outline-bgDark outline-offset-[-6px] transition-all duration-300 w-full md:w-auto min-h-screen md:min-h-0"
+      id="context-menu"
+      class="hidden fixed acrylic rounded-lg shadow-2xl border border-white/10 p-1 window-pop"
+    ></div>
+
+    <!-- Desktop Icons Container -->
+    <div id="icons-container" class="absolute inset-0 z-0"></div>
+
+    <!-- Windows Version Watermark -->
+    <div
+      id="version-watermark"
+      class="absolute bottom-20 right-4 text-right pointer-events-none z-0 opacity-80 select-none"
     >
-      <!-- Content Wrapper: Flex col on mobile, row on desktop -->
-      <div
-        class="flex flex-col md:flex-row items-center md:items-center gap-0 md:gap-5"
-      >
-        <!-- Video Container -->
-        <!-- UPDATED: Changed 'fixed top-0 left-0' to 'relative' on mobile. Removed fixed positioning gap issues. -->
+      <div class="text-white/60 text-sm font-medium font-sans">Windows 11</div>
+      <div id="footer-info" class="text-white/60 text-xs font-sans">
+        Loading build info...
+      </div>
+    </div>
+
+    <!-- Start Menu -->
+    <div
+      id="start-menu"
+      class="hidden fixed bottom-28 left-1/2 transform -translate-x-1/2 w-[600px] max-w-[95vw] h-[650px] max-h-[80vh] glass-panel rounded-lg shadow-2xl z-[9999] flex flex-col p-6 start-pop border border-white/10"
+      onclick="event.stopPropagation()"
+    >
+      <div class="mb-6">
         <div
-          class="video-container flex-1 md:w-[500px] md:max-w-full md:aspect-video md:h-auto overflow-hidden relative md:translate-y-[5%] w-full aspect-video md:pb-0 md:static relative h-auto z-[20]"
+          class="bg-[#1f1f1f] border border-white/10 rounded-md flex items-center px-3 py-2"
         >
-          <iframe
-            class="youtube-video absolute top-0 left-0 w-full h-full border-none md:static"
-            src="https://www.youtube.com/embed/I0jHbsidh1g?autoplay=1&mute=0&loop=1&playlist=I0jHbsidh1g"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+          <i data-lucide="search" class="w-4 h-4 text-gray-400 mr-2"></i>
+          <input
+            type="text"
+            placeholder="Type here to search"
+            class="bg-transparent border-none outline-none text-sm w-full text-white"
+          />
         </div>
+      </div>
 
-        <!-- Text Container -->
-        <div class="text-container flex-1 px-[15px] relative z-[1]">
-          <!-- UPDATED: Removed the calculation padding pt-[56.25vw] and the empty div. Now flows naturally. -->
-          <div class="w-full mt-5 md:mt-0">
-            <!-- INNER GRID: Split Text (Left) and Character (Right) -->
-            <div
-              class="flex flex-col md:flex-row items-center md:justify-center gap-6 w-full"
-            >
-              <!-- LEFT COLUMN: Text & Buttons -->
-              <div class="text-group flex flex-col items-center w-full">
-                <h1 class="text-5xl my-5 text-orangeTitle font-normal">
-                  r12azqha
-                </h1>
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-sm font-bold pl-2">Pinned</h3>
+        <button
+          class="bg-white/5 hover:bg-white/10 px-2 py-1 rounded text-xs flex items-center gap-1"
+        >
+          All apps <i data-lucide="chevron-right" class="w-3 h-3"></i>
+        </button>
+      </div>
+      <!-- Dynamic Start Menu Grid -->
+      <div id="start-pinned-grid" class="grid grid-cols-6 gap-4 mb-8 px-2">
+        <!-- Injected via JS -->
+      </div>
 
-                <div class="social-icons flex justify-center">
-                  <a
-                    class="dock-icon inline-block p-0 border-none bg-none no-underline text-transparent mx-[6px]"
-                    href="https://www.youtube.com/@r_12k.Incredibox"
-                    target="_blank"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="40"
-                      height="40"
-                      fill="#E0CFC6"
-                      class="bi bi-youtube transition-transform duration-[380ms] ease-dock-bounce w-[28px] h-[28px] md:w-[40px] md:h-[40px]"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"
-                      />
-                    </svg>
-                  </a>
-                  <a
-                    class="dock-icon inline-block p-0 border-none bg-none no-underline text-transparent mx-[6px]"
-                    href="https://r12azqha.itch.io/"
-                    target="_blank"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="40"
-                      width="40"
-                      fill="#E0CFC6"
-                      viewBox="0 0 245.371 220.736"
-                      class="transition-transform duration-[380ms] ease-dock-bounce w-[28px] h-[28px] md:w-[40px] md:h-[40px]"
-                    >
-                      <path
-                        d="M31.99 1.365C21.287 7.72.2 31.945 0 38.298v10.516C0 62.144 12.46 73.86 23.773 73.86c13.584 0 24.902-11.258 24.903-24.62 0 13.362 10.93 24.62 24.515 24.62 13.586 0 24.165-11.258 24.165-24.62 0 13.362 11.622 24.62 25.207 24.62h.246c13.586 0 25.208-11.258 25.208-24.62 0 13.362 10.58 24.62 24.164 24.62 13.585 0 24.515-11.258 24.515-24.62 0 13.362 11.32 24.62 24.903 24.62 11.313 0 23.773-11.714 23.773-25.046V38.298c-.2-6.354-21.287-30.58-31.988-36.933C180.118.197 157.056-.005 122.685 0c-34.37.003-81.228.54-90.697 1.365zm65.194 66.217a28.025 28.025 0 0 1-4.78 6.155c-5.128 5.014-12.157 8.122-19.906 8.122a28.482 28.482 0 0 1-19.948-8.126c-1.858-1.82-3.27-3.766-4.563-6.032l-.006.004c-1.292 2.27-3.092 4.215-4.954 6.037a28.5 28.5 0 0 1-19.948 8.12c-.934 0-1.906-.258-2.692-.528-1.092 11.372-1.553 22.24-1.716 30.164l-.002.045c-.02 4.024-.04 7.333-.06 11.93.21 23.86-2.363 77.334 10.52 90.473 19.964 4.655 56.7 6.775 93.555 6.788h.006c36.854-.013 73.59-2.133 93.554-6.788 12.883-13.14 10.31-66.614 10.52-90.474-.022-4.596-.04-7.905-.06-11.93l-.003-.045c-.162-7.926-.623-18.793-1.715-30.165-.786.27-1.757.528-2.692.528a28.5 28.5 0 0 1-19.948-8.12c-1.862-1.822-3.662-3.766-4.955-6.037l-.006-.004c-1.294 2.266-2.705 4.213-4.563 6.032a28.48 28.48 0 0 1-19.947 8.125c-7.748 0-14.778-3.11-19.906-8.123a28.025 28.025 0 0 1-4.78-6.155 27.99 27.99 0 0 1-4.736 6.155 28.49 28.49 0 0 1-19.95 8.124c-.27 0-.54-.012-.81-.02h-.007c-.27.008-.54.02-.813.02a28.49 28.49 0 0 1-19.95-8.123 27.992 27.992 0 0 1-4.736-6.155zm-20.486 26.49l-.002.01h.015c8.113.017 15.32 0 24.25 9.746 7.028-.737 14.372-1.105 21.722-1.094h.006c7.35-.01 14.694.357 21.723 1.094 8.93-9.747 16.137-9.73 24.25-9.746h.014l-.002-.01c3.833 0 19.166 0 29.85 30.007L210 165.244c8.504 30.624-2.723 31.373-16.727 31.4-20.768-.773-32.267-15.855-32.267-30.935-11.496 1.884-24.907 2.826-38.318 2.827h-.006c-13.412 0-26.823-.943-38.318-2.827 0 15.08-11.5 30.162-32.267 30.935-14.004-.027-25.23-.775-16.726-31.4L46.85 124.08C57.534 94.073 72.867 94.073 76.7 94.073zm45.985 23.582v.006c-.02.02-21.863 20.08-25.79 27.215l14.304-.573v12.474c0 .584 5.74.346 11.486.08h.006c5.744.266 11.485.504 11.485-.08v-12.474l14.304.573c-3.928-7.135-25.79-27.215-25.79-27.215v-.006l-.003.002z"
-                        color="#000"
-                      />
-                    </svg>
-                  </a>
-                  <a
-                    class="dock-icon inline-block p-0 border-none bg-none no-underline text-transparent mx-[6px]"
-                    href="https://github.com/r12azqha/"
-                    target="_blank"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="40"
-                      height="40"
-                      fill="#E0CFC6"
-                      class="bi bi-github transition-transform duration-[380ms] ease-dock-bounce w-[28px] h-[28px] md:w-[40px] md:h-[40px]"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
-                      />
-                    </svg>
-                  </a>
-                  <a
-                    class="dock-icon inline-block p-0 border-none bg-none no-underline text-transparent mx-[6px]"
-                    href="mailto:business@r12azqha.com"
-                    target="_blank"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="40"
-                      height="40"
-                      fill="#E0CFC6"
-                      class="bi bi-discord transition-transform duration-[380ms] ease-dock-bounce w-[28px] h-[28px] md:w-[40px] md:h-[40px]"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"
-                      />
-                    </svg>
-                  </a>
-                  <a
-                    class="dock-icon inline-block p-0 border-none bg-none no-underline text-transparent mx-[6px]"
-                    href="https://www.instagram.com/r12azqha"
-                    target="_blank"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="40"
-                      height="40"
-                      fill="#E0CFC6"
-                      class="bi bi-instagram transition-transform duration-[380ms] ease-dock-bounce w-[28px] h-[28px] md:w-[40px] md:h-[40px]"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"
-                        color="#000"
-                      />
-                    </svg>
-                  </a>
-                </div>
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-sm font-bold pl-2">Recommended</h3>
+        <button
+          class="bg-white/5 hover:bg-white/10 px-2 py-1 rounded text-xs flex items-center gap-1"
+        >
+          More <i data-lucide="chevron-right" class="w-3 h-3"></i>
+        </button>
+      </div>
 
-                <!-- Divider -->
-                <hr
-                  class="h-px bg-divider w-4/5 self-center my-[5px] border-none"
-                />
-
-                <!-- Buttons (Restored to previous logic, inside Left Column) -->
-                <div
-                  class="buttons flex flex-wrap justify-center gap-[15px] my-5 items-stretch w-full"
-                >
-                  <a
-                    href="https://www.youtube.com/@r_12k.Incredibox"
-                    target="_blank"
-                    class="bg-btnYellow px-[10px] py-[2px] text-white no-underline rounded-[5px] font-bold shadow-[5px_5px_#f99c37] transition-all duration-300 ease-btn-bounce flex-auto min-w-0 max-w-[125px] h-7 text-[12px] md:text-[11px] text-[clamp(8px,2vw,11px)] flex items-center justify-center overflow-hidden whitespace-nowrap text-ellipsis hover:bg-btnHover hover:text-white hover:rotate-[5deg] basis-[calc(50%-10px)] md:basis-[calc(33.33%-10px)]"
-                    >📺 YouTube</a
-                  >
-                  <a
-                    href="https://r12azqha.itch.io/"
-                    target="_blank"
-                    class="bg-btnYellow px-[10px] py-[2px] text-white no-underline rounded-[5px] font-bold shadow-[5px_5px_#f99c37] transition-all duration-300 ease-btn-bounce flex-auto min-w-0 max-w-[125px] h-7 text-[12px] md:text-[11px] text-[clamp(8px,2vw,11px)] flex items-center justify-center overflow-hidden whitespace-nowrap text-ellipsis hover:bg-btnHover hover:text-white hover:rotate-[5deg] basis-[calc(50%-10px)] md:basis-[calc(33.33%-10px)]"
-                    >🎮 Itch.io</a
-                  >
-                  <a
-                    href="https://github.com/r12azqha/"
-                    target="_blank"
-                    class="bg-btnYellow px-[10px] py-[2px] text-white no-underline rounded-[5px] font-bold shadow-[5px_5px_#f99c37] transition-all duration-300 ease-btn-bounce flex-auto min-w-0 max-w-[125px] h-7 text-[12px] md:text-[11px] text-[clamp(8px,2vw,11px)] flex items-center justify-center overflow-hidden whitespace-nowrap text-ellipsis hover:bg-btnHover hover:text-white hover:rotate-[5deg] basis-[calc(50%-10px)] md:basis-[calc(33.33%-10px)]"
-                    >💻 GitHub</a
-                  >
-                  <a
-                    href="mailto:business@r12azqha.com"
-                    target="_blank"
-                    class="bg-btnYellow px-[10px] py-[2px] text-white no-underline rounded-[5px] font-bold shadow-[5px_5px_#f99c37] transition-all duration-300 ease-btn-bounce flex-auto min-w-0 max-w-[125px] h-7 text-[12px] md:text-[11px] text-[clamp(8px,2vw,11px)] flex items-center justify-center overflow-hidden whitespace-nowrap text-ellipsis hover:bg-btnHover hover:text-white hover:rotate-[5deg] basis-[calc(50%-10px)] md:basis-[calc(33.33%-10px)]"
-                    >📩 Email</a
-                  >
-                  <a
-                    href="https://www.instagram.com/r12azqha/?hl=id"
-                    target="_blank"
-                    class="bg-btnYellow px-[10px] py-[2px] text-white no-underline rounded-[5px] font-bold shadow-[5px_5px_#f99c37] transition-all duration-300 ease-btn-bounce flex-auto min-w-0 max-w-[125px] h-7 text-[12px] md:text-[11px] text-[clamp(8px,2vw,11px)] flex items-center justify-center overflow-hidden whitespace-nowrap text-ellipsis hover:bg-btnHover hover:text-white hover:rotate-[5deg] basis-[calc(50%-10px)] md:basis-[calc(33.33%-10px)]"
-                    >📸 Socials</a
-                  >
-                </div>
-              </div>
-
-              <!-- RIGHT COLUMN: Character Image (Own Div) -->
-              <div class="character-container shrink-0 flex justify-center">
-                <a href="https://blockyfoxburo.github.io">
-                  <img
-                    src="https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/20250924-instagram-rua.ngtenang-c.png?raw=true"
-                    alt="Character"
-                    class="character-image w-[150px]"
-                  />
-                </a>
-              </div>
-            </div>
+      <div class="grid grid-cols-2 gap-2 overflow-auto custom-scrollbar px-2">
+        <div
+          class="flex items-center gap-3 p-2 hover:bg-white/5 rounded cursor-pointer"
+          onclick="window.openWindow('projects'); window.toggleStartMenu()"
+          oncontextmenu="window.showTaskbarContext(event, 'projects')"
+        >
+          <div
+            class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center"
+          >
+            <i data-lucide="folder" class="w-4 h-4 text-white"></i>
           </div>
+          <div class="flex flex-col">
+            <span class="text-xs font-semibold">My Projects</span
+            ><span class="text-[10px] text-gray-400">Recently added</span>
+          </div>
+        </div>
+        <div
+          class="flex items-center gap-3 p-2 hover:bg-white/5 rounded cursor-pointer"
+          onclick="window.openWindow('resume'); window.toggleStartMenu()"
+          oncontextmenu="window.showTaskbarContext(event, 'resume')"
+        >
+          <div
+            class="w-8 h-8 bg-yellow-500 rounded flex items-center justify-center"
+          >
+            <i data-lucide="file-text" class="w-4 h-4 text-white"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-xs font-semibold">Resume.pdf</span
+            ><span class="text-[10px] text-gray-400">10 min ago</span>
+          </div>
+        </div>
+        <div
+          class="flex items-center gap-3 p-2 hover:bg-white/5 rounded cursor-pointer"
+          onclick="window.openWindow('gallery'); window.toggleStartMenu()"
+          oncontextmenu="window.showTaskbarContext(event, 'gallery')"
+        >
+          <div
+            class="w-8 h-8 bg-green-500 rounded flex items-center justify-center"
+          >
+            <i data-lucide="images" class="w-4 h-4 text-white"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-xs font-semibold">Gallery</span
+            ><span class="text-[10px] text-gray-400">Yesterday</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-grow"></div>
+
+      <div
+        class="mt-auto pt-4 border-t border-white/10 flex justify-between items-center px-2"
+      >
+        <div
+          class="flex items-center gap-3 hover:bg-white/5 p-2 rounded cursor-pointer transition"
+        >
+          <div
+            class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-400 to-purple-500 p-[1px]"
+          >
+            <img
+              src="https://github.com/r12azqha.png"
+              class="rounded-full w-full h-full"
+              onerror="this.src='https://github.com/github.png'"
+            />
+          </div>
+          <span class="text-sm font-semibold">r12azqha</span>
+        </div>
+        <div class="hover:bg-white/5 p-2 rounded cursor-pointer transition">
+          <i data-lucide="power" class="w-5 h-5"></i>
         </div>
       </div>
     </div>
 
-    <!-- NEW FOOTER SECTION -->
+    <!-- Calendar Flyout -->
     <div
-      class="footer absolute bottom-[15px] left-0 w-full text-center font-mono text-[10px] text-white/40 z-10 tracking-widest uppercase pointer-events-none pb-[10px] md:pb-0"
-      id="footer-info"
+      id="calendar-flyout"
+      class="hidden absolute bottom-16 right-4 w-80 acrylic rounded-xl p-4 z-[9999] flex flex-col gap-4 window-pop text-sm overflow-hidden"
+      onclick="event.stopPropagation()"
     >
-      Deploy: Loading... &bull; Hash: ...
+      <div
+        class="flex justify-between items-end border-b border-white/10 pb-2 cursor-default"
+        onmousedown="window.startDrag(event, 'calendar-flyout')"
+      >
+        <div>
+          <div
+            id="cal-time-large"
+            class="text-4xl font-light pointer-events-none tabular-nums"
+          >
+            12:12
+          </div>
+          <div
+            id="cal-date-large"
+            class="text-blue-300 font-semibold pointer-events-none"
+          >
+            Saturday, 18 January 200X
+          </div>
+        </div>
+      </div>
+      <div
+        class="relative cursor-default"
+        onmousedown="event.stopPropagation()"
+      >
+        <div class="flex justify-between items-center mb-4 relative z-10">
+          <span id="cal-month-year" class="font-semibold ml-2"
+            >November 2025</span
+          >
+          <div class="flex gap-2">
+            <button
+              onclick="window.changeMonth(-1); event.stopPropagation()"
+              class="p-1 hover:bg-white/10 rounded transition-colors"
+            >
+              <i data-lucide="chevron-up" class="w-4 h-4"></i>
+            </button>
+            <button
+              onclick="window.changeMonth(1); event.stopPropagation()"
+              class="p-1 hover:bg-white/10 rounded transition-colors"
+            >
+              <i data-lucide="chevron-down" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+        <div
+          class="grid grid-cols-7 gap-1 text-center text-xs text-gray-400 mb-2"
+        >
+          <div>Su</div>
+          <div>Mo</div>
+          <div>Tu</div>
+          <div>We</div>
+          <div>Th</div>
+          <div>Fr</div>
+          <div>Sa</div>
+        </div>
+        <div id="calendar-slider-wrapper" class="overflow-hidden">
+          <div
+            id="calendar-days"
+            class="grid grid-cols-7 gap-1 text-center calendar-slider"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Taskbar Container -->
+    <div
+      id="taskbar"
+      class="absolute bottom-4 left-1/2 transform -translate-x-1/2 acrylic px-4 py-2 rounded-2xl flex items-center gap-2 z-[9999] shadow-2xl border border-white/10 h-16 min-w-fit transition-all duration-700 ease-out opacity-0"
+    >
+      <!-- Start -->
+      <div
+        id="start-btn"
+        onclick="window.toggleStartMenu(); event.stopPropagation()"
+        class="taskbar-item w-10 h-10 rounded-md flex items-center justify-center cursor-pointer mr-2 mx-1 scale-0 opacity-0 transition-all duration-500"
+      >
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="#00a2ed">
+          <path
+            d="M0 3.44L9.38 2.13v9.13H0V3.44zM10.87 1.92L24 0v11.26H10.87V1.92zM0 12.51h9.38v9.17L0 20.37v-7.86zM10.87 12.51H24v11.29L10.87 22.08V12.51z"
+          />
+        </svg>
+      </div>
+
+      <!-- Pinned Apps -->
+      <div
+        id="taskbar-pinned"
+        class="flex gap-2 transition-all duration-500 ease-out"
+      ></div>
+
+      <!-- Separator -->
+      <div
+        id="running-apps-divider"
+        class="w-0 mx-0 opacity-0 h-4 bg-white/10 transition-all duration-500 ease-out transform translate-x-0"
+      ></div>
+
+      <!-- Running Apps -->
+      <div
+        id="taskbar-running"
+        class="flex gap-2 transition-all duration-500 ease-out"
+      ></div>
+
+      <!-- Clock Separator -->
+      <div class="w-px h-4 bg-white/10 mx-1"></div>
+
+      <!-- Clock -->
+      <div
+        id="taskbar-clock"
+        onclick="window.toggleCalendar(); event.stopPropagation()"
+        class="flex flex-col items-end justify-center px-2 cursor-pointer text-right hover:bg-white/10 rounded p-1 transition-colors select-none min-w-[80px] opacity-0 translate-x-[-20px]"
+      >
+        <span
+          class="text-[10px] font-medium leading-none mb-1 tabular-nums"
+          id="clock-time"
+          >12:12</span
+        >
+        <span class="text-[10px] leading-none text-gray-400" id="clock-date"
+          >1/18/200X</span
+        >
+      </div>
     </div>
 
     <script>
-      (function () {
-        const repo = "r12azqha/r12azqha.github.io";
+      // --- GLOBAL CONSTANTS & STATE ---
+      const globalBio =
+        "🍊 Yelloww! I am a Content Creator, Minecraft Animator, Graphics & Motion Designer, Game Developer, and more! 🎨🎮 (phew that was a lot..)";
+      let highestZ = 100;
+      let activeDrag = null;
+      let dragOffsetX = 0,
+        dragOffsetY = 0;
+      let isMouseDown = false;
+      let hasDragged = false;
 
-        const fetchDeploy = fetch(
-          `https://api.github.com/repos/${repo}/commits?per_page=1`
-        ).then((res) => {
-          const link = res.headers.get("Link");
-          if (link) {
-            const match = link.match(/page=(\d+)>; rel="last"/);
-            return match ? match[1] : "unknown";
+      let activeResize = null;
+      let resizeDir = null;
+      let resizeStartX = 0,
+        resizeStartY = 0;
+      let resizeStartWidth = 0,
+        resizeStartHeight = 0;
+      let resizeStartLeft = 0,
+        resizeStartTop = 0;
+
+      const windows = {};
+      let displayDate = new Date();
+
+      let pinnedTaskbarApps = [
+        "youtube",
+        "itchio",
+        "github",
+        "email",
+        "instagram",
+      ];
+      let pinnedStartApps = [
+        "youtube",
+        "itchio",
+        "github",
+        "email",
+        "instagram",
+        "settings",
+      ];
+
+      const defaultStartApps = [
+        "youtube",
+        "itchio",
+        "github",
+        "email",
+        "instagram",
+        "settings",
+      ];
+
+      let runningApps = new Set();
+      let booted = false;
+
+      const desktopIconsData = [
+        {
+          id: "projects",
+          icon: "folder",
+          color: "bg-blue-500",
+          label: "My Projects",
+        },
+        {
+          id: "resume",
+          icon: "file-text",
+          color: "bg-yellow-500",
+          label: "Resume.pdf",
+        },
+        {
+          id: "gallery",
+          icon: "images",
+          color: "bg-green-500",
+          label: "Gallery",
+        },
+        {
+          id: "playlist",
+          icon: "music",
+          color: "bg-purple-600",
+          label: "Playlist",
+        },
+        {
+          id: "settings",
+          icon: "settings",
+          color: "bg-gray-700",
+          label: "Settings",
+        },
+      ];
+
+      const videoPlaylist = [
+        { id: "I0jHbsidh1g" },
+        { id: "_UqGrwCbxVI" },
+        { id: "BmmMfZR8C80" },
+        { id: "4xDzrJKX8EY" },
+        { id: "e3L1PIY1bnE" },
+      ];
+
+      let githubData = {
+        user: "r12azqha",
+        avatar: "https://github.com/r12azqha.png",
+        bio: "GitHub User",
+        repos: [],
+        contributions: [],
+      };
+      const instagramData = {
+        user: "r12azqha",
+        posts: "42",
+        followers: "1.2k",
+        following: "300",
+        bio: "under construction...",
+        images: [],
+      };
+      const itchioData = {
+        user: "BlockyFoxBuro",
+        bio: "lorem ipsum dolor sit amet",
+        avatar:
+          "https://img.itch.zone/aW1hZ2UvODg4ODg4LzUyMjIyMjIucG5n/original/123456.png",
+        games: [
+          {
+            title: "No Pain No Gain",
+            url: "https://r12azqha.itch.io/no-pain-no-gain",
+            type: "Visual Novel",
+            color: "bg-red-500",
+          },
+          {
+            title: "Griya Senja",
+            url: "https://r12azqha.itch.io/griya-senja",
+            type: "Web",
+            color: "bg-orange-500",
+          },
+          {
+            title: "pj_firefly",
+            url: "https://r12azqha.itch.io/project-firefly",
+            type: "Web",
+            color: "bg-yellow-500",
+          },
+          {
+            title: "PariTheParrot",
+            url: "https://r12azqha.itch.io/paritheparrot",
+            type: "Web",
+            color: "bg-green-500",
+          },
+          {
+            title: "KampusKu - Alpha",
+            url: "https://r12azqha.itch.io/kampusku",
+            type: "Web",
+            color: "bg-blue-500",
+          },
+          {
+            title: "KampusKu (prototype)",
+            url: "https://r12azqha.itch.io/kampusku-prototype",
+            type: "Role Playing",
+            color: "bg-indigo-500",
+          },
+        ],
+      };
+
+      const appContent = {
+        itchio: {
+          title: "Itch.io",
+          icon: "gamepad-2",
+          color: "text-red-400",
+          content: "DYNAMIC",
+        },
+        email: {
+          title: "Email",
+          icon: "mail",
+          color: "text-blue-400",
+          content: `<div class="p-4"><h2>Inbox</h2></div>`,
+        },
+        projects: {
+          title: "My Projects",
+          icon: "folder",
+          color: "text-yellow-400",
+          content: `<div class="p-4"><h2>Projects</h2></div>`,
+        },
+        resume: {
+          title: "Resume.pdf",
+          icon: "file-text",
+          color: "text-red-400",
+          content: `<div class="p-4"><h2>Resume</h2></div>`,
+        },
+        gallery: {
+          title: "Gallery",
+          icon: "images",
+          color: "text-purple-400",
+          content: `<div class="p-4"><h2>Gallery</h2></div>`,
+        },
+        settings: {
+          title: "Settings",
+          icon: "settings",
+          color: "text-gray-400",
+          content: `<div class="p-4"><h2>Settings</h2></div>`,
+        },
+        youtube: { title: "YouTube", icon: "youtube", color: "text-red-500" },
+        playlist: { title: "YouTube", icon: "youtube", color: "text-red-500" },
+        github: { title: "GitHub", icon: "github", color: "text-white" },
+        instagram: {
+          title: "Instagram",
+          icon: "instagram",
+          color: "text-pink-500",
+        },
+      };
+
+      // --- HELPER FUNCTIONS ---
+      window.initDesktopIcons = function () {
+        const container = document.getElementById("icons-container");
+        let startX = 10,
+          startY = 10,
+          gapY = 110;
+        desktopIconsData.forEach((icon, index) => {
+          const el = document.createElement("div");
+          el.className =
+            "desktop-icon cursor-pointer group text-center select-none";
+          el.style.left = `${startX}px`;
+          el.style.top = `${startY + index * gapY}px`;
+          el.onclick = (e) => {
+            e.stopPropagation();
+            document
+              .querySelectorAll(".desktop-icon")
+              .forEach((i) => i.classList.remove("selected"));
+            el.classList.add("selected");
+          };
+          el.onmousedown = (e) => startIconDrag(e, el);
+          el.ondblclick = () => window.openWindow(icon.id);
+          el.oncontextmenu = (e) => showTaskbarContext(e, icon.id);
+          el.innerHTML = `<div class="w-10 h-10 ${icon.color} rounded-lg flex items-center justify-center shadow-lg mb-1 pointer-events-none"><i data-lucide="${icon.icon}" class="text-white w-6 h-6"></i></div><span class="text-xs text-shadow drop-shadow-md bg-black/20 px-1 rounded pointer-events-none line-clamp-2 leading-tight">${icon.label}</span>`;
+          container.appendChild(el);
+        });
+        lucide.createIcons();
+      };
+
+      window.renderStartMenu = function () {
+        const grid = document.getElementById("start-pinned-grid");
+        grid.innerHTML = "";
+
+        pinnedStartApps.forEach((appId) => {
+          let iconName = "app-window";
+          let colorClass = "text-white";
+          let containerClass = "rounded-lg";
+          let bgClass = "bg-gray-600";
+
+          if (appId === "youtube") {
+            iconName = "youtube";
+            bgClass = "bg-red-600";
+          } else if (appId === "itchio") {
+            iconName = "gamepad-2";
+            bgClass = "bg-[#fa5c5c]";
+          } else if (appId === "github") {
+            iconName = "github";
+            bgClass = "bg-gray-800";
+            containerClass = "rounded-full";
+          } else if (appId === "email") {
+            iconName = "mail";
+            bgClass = "bg-blue-500";
+          } else if (appId === "instagram") {
+            iconName = "instagram";
+            bgClass = "bg-pink-600";
+            containerClass = "rounded-full";
+          } else if (appId === "settings") {
+            iconName = "settings";
+            bgClass = "bg-gray-600";
+          } else if (appId === "projects") {
+            iconName = "folder";
+            bgClass = "bg-blue-500";
+          } else if (appId === "resume") {
+            iconName = "file-text";
+            bgClass = "bg-yellow-500";
+          } else if (appId === "gallery") {
+            iconName = "images";
+            bgClass = "bg-green-500";
+          } else if (appId === "playlist") {
+            iconName = "music";
+            bgClass = "bg-purple-600";
           }
-          return "???";
+
+          const el = document.createElement("div");
+          el.className =
+            "flex flex-col items-center gap-2 group cursor-pointer";
+          el.onclick = () => window.toggleTaskbarApp(appId);
+          el.oncontextmenu = (e) => showTaskbarContext(e, appId);
+          el.innerHTML = `
+                    <div class="w-10 h-10 ${bgClass} ${containerClass} flex items-center justify-center shadow-md group-hover:scale-105 transition border border-white/10">
+                        <i data-lucide="${iconName}" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <span class="text-xs text-center text-gray-300 capitalize">${appId}</span>
+                `;
+          grid.appendChild(el);
+        });
+        lucide.createIcons();
+      };
+
+      window.renderTaskbar = function () {
+        const pinnedContainer = document.getElementById("taskbar-pinned");
+        const runningContainer = document.getElementById("taskbar-running");
+        const divider = document.getElementById("running-apps-divider");
+
+        if (!pinnedContainer || !runningContainer) return;
+
+        const existingIds = Array.from(runningContainer.children).map((c) =>
+          c.id.replace("icon-", "")
+        );
+        pinnedContainer.innerHTML = "";
+        pinnedTaskbarApps.forEach((appId) => {
+          pinnedContainer.appendChild(buildIconElement(appId, false));
         });
 
-        const fetchCommit = fetch(
-          `https://api.github.com/repos/${repo}/commits/main`
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            if (!data.sha)
-              return { hash: "unknown", date: new Date(), position: 0 };
-            const commitDate = new Date(data.commit.author.date);
+        const currentRunningIds = Array.from(runningApps).filter(
+          (id) => !pinnedTaskbarApps.includes(id)
+        );
 
-            // Fetch commits of the same week to determine letter
-            return fetch(
-              `https://api.github.com/repos/${repo}/commits?since=${new Date(
-                commitDate.getFullYear(),
-                0,
-                1
-              ).toISOString()}&until=${commitDate.toISOString()}`
-            )
-              .then((res) => res.json())
-              .then((allCommits) => {
-                const year = commitDate.getFullYear();
-                const week = Math.ceil(
-                  ((commitDate - new Date(year, 0, 1)) / 86400000 +
-                    new Date(year, 0, 1).getDay() +
-                    1) /
-                    7
-                );
-                const weekStr = String(week).padStart(2, "0");
+        Array.from(runningContainer.children).forEach((child) => {
+          const id = child.id.replace("icon-", "");
+          if (!currentRunningIds.includes(id)) {
+            if (!child.classList.contains("app-exit")) {
+              child.classList.add("app-exit");
+              setTimeout(() => {
+                if (child.parentNode) child.remove();
+                window.updateDivider();
+              }, 300);
+            }
+          }
+        });
 
-                // Filter commits in the same week
-                const sameWeekCommits = allCommits.filter((c) => {
-                  const d = new Date(c.commit.author.date);
-                  const w = Math.ceil(
-                    ((d - new Date(d.getFullYear(), 0, 1)) / 86400000 +
-                      new Date(d.getFullYear(), 0, 1).getDay() +
+        currentRunningIds.forEach((appId) => {
+          if (!document.getElementById(`icon-${appId}`)) {
+            const el = buildIconElement(appId, true);
+            runningContainer.appendChild(el);
+          }
+        });
+
+        setTimeout(() => {
+          const allIcons = document.querySelectorAll(".taskbar-item");
+          allIcons.forEach((icon) => {
+            const appId = icon.id.replace("icon-", "");
+            let isOpen = false;
+            if (appId === "youtube" || appId === "playlist") {
+              if (windows["youtube"]) isOpen = true;
+            } else if (windows[appId]) isOpen = true;
+
+            if (isOpen) icon.classList.add("open");
+            else icon.classList.remove("open");
+          });
+          window.updateDivider();
+        }, 0);
+
+        lucide.createIcons();
+      };
+
+      window.updateDivider = function () {
+        const divider = document.getElementById("running-apps-divider");
+        const runningContainer = document.getElementById("taskbar-running");
+        const count = Array.from(runningContainer.children).filter(
+          (c) => !c.classList.contains("app-exit")
+        ).length;
+        if (count > 0) {
+          divider.classList.remove("w-0", "mx-0", "opacity-0", "translate-x-3");
+          divider.classList.add("w-px", "mx-1", "opacity-100", "translate-x-0");
+        } else {
+          divider.classList.add("w-0", "mx-0", "opacity-0", "translate-x-3");
+          divider.classList.remove(
+            "w-px",
+            "mx-1",
+            "opacity-100",
+            "translate-x-0"
+          );
+        }
+      };
+
+      function buildIconElement(appId, isNew) {
+        let iconName = "app-window";
+        let colorClass = "text-white";
+        let containerClass = "rounded-md";
+
+        if (appId === "youtube") {
+          iconName = "youtube";
+          colorClass = "text-red-600";
+        } else if (appId === "itchio") {
+          iconName = "gamepad-2";
+          colorClass = "text-[#fa5c5c]";
+        } else if (appId === "github") {
+          iconName = "github";
+          colorClass = "text-white";
+        } else if (appId === "email") {
+          iconName = "mail";
+          colorClass = "text-blue-500";
+        } else if (appId === "instagram") {
+          iconName = "instagram";
+          colorClass = "text-pink-500";
+        } else if (appId === "settings") {
+          iconName = "settings";
+          colorClass = "text-gray-500";
+        } else if (appId === "projects") {
+          iconName = "folder";
+          colorClass = "text-blue-500";
+        } else if (appId === "resume") {
+          iconName = "file-text";
+          colorClass = "text-yellow-500";
+        } else if (appId === "gallery") {
+          iconName = "images";
+          colorClass = "text-green-500";
+        } else if (appId === "playlist") {
+          iconName = "music";
+          colorClass = "text-purple-600";
+        }
+
+        const animClass = isNew ? "taskbar-pop" : "";
+
+        const el = document.createElement("div");
+        el.id = `icon-${appId}`;
+        el.className = `taskbar-item w-10 h-10 ${containerClass} flex items-center justify-center cursor-pointer group relative mx-1 ${animClass}`;
+        el.onclick = () => window.toggleTaskbarApp(appId);
+        el.addEventListener("contextmenu", (e) => showTaskbarContext(e, appId));
+        el.innerHTML = `<i data-lucide="${iconName}" class="${colorClass} w-6 h-6"></i>`;
+        return el;
+      }
+
+      window.bootTaskbar = async function () {
+        const taskbar = document.getElementById("taskbar");
+        taskbar.style.opacity = "1";
+        const startBtn = document.getElementById("start-btn");
+        startBtn.classList.remove("scale-0", "opacity-0");
+        await new Promise((r) => setTimeout(r, 300));
+        const clock = document.getElementById("taskbar-clock");
+        clock.classList.add("clock-slide");
+        await new Promise((r) => setTimeout(r, 200));
+        const pinnedContainer = document.getElementById("taskbar-pinned");
+        pinnedContainer.innerHTML = "";
+        for (const appId of pinnedTaskbarApps) {
+          const el = buildIconElement(appId, true);
+          pinnedContainer.appendChild(el);
+          lucide.createIcons();
+          await new Promise((r) => setTimeout(r, 100));
+        }
+        booted = true;
+      };
+
+      window.toggleStartMenu = function () {
+        const menu = document.getElementById("start-menu");
+        document.getElementById("calendar-flyout").classList.add("hidden");
+        if (menu.classList.contains("hidden")) {
+          menu.classList.remove("hidden");
+          menu.classList.remove("start-pop");
+          void menu.offsetWidth;
+          menu.classList.add("start-pop");
+        } else {
+          menu.classList.add("hidden");
+        }
+      };
+      window.toggleCalendar = function () {
+        const cal = document.getElementById("calendar-flyout");
+        document.getElementById("start-menu").classList.add("hidden");
+        if (cal.classList.contains("hidden")) {
+          cal.classList.remove("hidden");
+          highestZ++;
+          cal.style.zIndex = highestZ;
+          updateClock();
+        } else {
+          cal.classList.add("hidden");
+        }
+      };
+      window.changeMonth = function (offset) {
+        displayDate.setMonth(displayDate.getMonth() + offset);
+        generateCalendar(true);
+      };
+      window.toggleTaskbarApp = function (appId) {
+        document.getElementById("start-menu").classList.add("hidden");
+        document.getElementById("calendar-flyout").classList.add("hidden");
+        let targetId = appId === "playlist" ? "youtube" : appId;
+        const win = windows[targetId];
+        if (!win) {
+          window.openWindow(appId);
+        } else {
+          if (win.classList.contains("window-minimized")) {
+            win.classList.remove("window-minimized");
+            window.focusWindow(win);
+            if (appId === "youtube")
+              window.playVideoInWindow(win.id, videoPlaylist[0].id);
+          } else {
+            if (parseInt(win.style.zIndex) === highestZ)
+              window.minimizeWindow(win);
+            else {
+              window.focusWindow(win);
+              if (appId === "youtube")
+                window.playVideoInWindow(win.id, videoPlaylist[0].id);
+            }
+          }
+        }
+      };
+      window.closeWindow = function (element) {
+        const win =
+          element.classList && element.classList.contains("os-window")
+            ? element
+            : element.closest(".os-window");
+        const id = win.dataset.appid;
+        win.style.opacity = "0";
+        win.style.transform = "scale(0.95)";
+        const isPinned = pinnedTaskbarApps.includes(id);
+        setTimeout(() => {
+          win.remove();
+          if (id) {
+            delete windows[id];
+            if (!isPinned) {
+              const icon = document.getElementById(`icon-${id}`);
+              if (icon) {
+                icon.classList.add("app-exit");
+                setTimeout(() => {
+                  runningApps.delete(id);
+                  window.renderTaskbar();
+                }, 300);
+              } else {
+                runningApps.delete(id);
+                window.renderTaskbar();
+              }
+            } else {
+              runningApps.delete(id);
+              window.renderTaskbar();
+            }
+          }
+        }, 200);
+      };
+      window.minimizeWindow = function (btnOrWin) {
+        const win =
+          btnOrWin.classList && btnOrWin.classList.contains("os-window")
+            ? btnOrWin
+            : btnOrWin.closest(".os-window");
+        win.classList.add("window-minimized");
+      };
+      window.maximizeWindow = function (btn) {
+        btn.closest(".os-window").classList.toggle("window-maximized");
+      };
+      window.focusWindow = function (win) {
+        win.style.zIndex = ++highestZ;
+      };
+      window.togglePin = function (appId) {
+        if (pinnedTaskbarApps.includes(appId))
+          pinnedTaskbarApps = pinnedTaskbarApps.filter((id) => id !== appId);
+        else pinnedTaskbarApps.push(appId);
+        window.renderTaskbar();
+      };
+      window.togglePinStart = function (appId) {
+        if (pinnedStartApps.includes(appId)) {
+          if (!defaultStartApps.includes(appId)) {
+            pinnedStartApps = pinnedStartApps.filter((id) => id !== appId);
+          }
+        } else {
+          pinnedStartApps.push(appId);
+        }
+        window.renderStartMenu();
+      };
+      window.forceCloseApp = function (appId) {
+        if (windows[appId]) {
+          window.closeWindow(windows[appId]);
+        }
+      };
+
+      function showTaskbarContext(e, appId) {
+        e.preventDefault();
+        e.stopPropagation();
+        const menu = document.getElementById("context-menu");
+        if (e.target.closest("#start-menu")) {
+          document.getElementById("start-menu").classList.remove("hidden");
+        } else {
+          document.getElementById("start-menu").classList.add("hidden");
+        }
+        document.getElementById("calendar-flyout").classList.add("hidden");
+        menu.classList.remove("hidden");
+        let x = e.clientX;
+        let y = e.clientY;
+        if (e.target.closest("#taskbar")) {
+          const iconRect = e.currentTarget.getBoundingClientRect();
+          x = iconRect.left;
+          if (x + 200 > window.innerWidth) x = window.innerWidth - 210;
+          menu.style.left = `${x}px`;
+          menu.style.top = "auto";
+          menu.style.bottom = "70px";
+        } else {
+          if (x + 200 > window.innerWidth) x -= 200;
+          if (y + 150 > window.innerHeight) y -= 150;
+          menu.style.left = `${x}px`;
+          menu.style.top = `${y}px`;
+          menu.style.bottom = "auto";
+        }
+        const isPinned = pinnedTaskbarApps.includes(appId);
+        const isPinnedStart = pinnedStartApps.includes(appId);
+        const isDefaultStart = defaultStartApps.includes(appId);
+        let realId = appId === "playlist" ? "youtube" : appId;
+        const isRunning = windows[realId];
+        let menuHTML = `<div class="context-item" onclick="window.togglePin('${appId}'); document.getElementById('context-menu').classList.add('hidden')"><i data-lucide="${
+          isPinned ? "pin-off" : "pin"
+        }" class="w-4 h-4"></i> <span>${
+          isPinned ? "Unpin from taskbar" : "Pin to taskbar"
+        }</span></div>`;
+        if (!isDefaultStart || !isPinnedStart) {
+          menuHTML += `<div class="context-item" onclick="window.togglePinStart('${appId}'); document.getElementById('context-menu').classList.add('hidden')"><i data-lucide="${
+            isPinnedStart ? "minus-circle" : "star"
+          }" class="w-4 h-4"></i> <span>${
+            isPinnedStart ? "Unpin from Start" : "Pin to Start"
+          }</span></div>`;
+        }
+        if (isRunning) {
+          menuHTML += `<div class="context-item" onclick="window.closeWindow(windows['${realId}']); document.getElementById('context-menu').classList.add('hidden')"><i data-lucide="x" class="w-4 h-4"></i> <span>Close window</span></div><div class="context-item text-red-400" onclick="window.forceCloseApp('${realId}'); document.getElementById('context-menu').classList.add('hidden')"><i data-lucide="ban" class="w-4 h-4"></i> <span>End task</span></div>`;
+        }
+        menu.innerHTML = menuHTML;
+        lucide.createIcons();
+      }
+      window.showTaskbarContext = showTaskbarContext;
+
+      window.startResize = function (e, id, direction) {
+        e.preventDefault();
+        e.stopPropagation();
+        const win = document.getElementById(id);
+        if (!win) return;
+        activeResize = win;
+        resizeDir = direction;
+        resizeStartX = e.clientX;
+        resizeStartY = e.clientY;
+        const rect = win.getBoundingClientRect();
+        resizeStartWidth = rect.width;
+        resizeStartHeight = rect.height;
+        resizeStartLeft = rect.left;
+        resizeStartTop = rect.top;
+        win.style.transform = "none";
+        win.style.left = resizeStartLeft + "px";
+        win.style.top = resizeStartTop + "px";
+        window.focusWindow(win);
+      };
+      window.startDrag = function (e, id) {
+        if (e.button !== 0) return;
+        let target = typeof id === "string" ? document.getElementById(id) : id;
+        if (!target || target.classList.contains("window-maximized")) return;
+        isMouseDown = true;
+        hasDragged = false;
+        activeDrag = target;
+        if (target.classList.contains("os-window")) window.focusWindow(target);
+        const rect = target.getBoundingClientRect();
+        target.style.transform = "none";
+        target.style.right = "auto";
+        target.style.bottom = "auto";
+        target.style.left = rect.left + "px";
+        target.style.top = rect.top + "px";
+        const cX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+        const cY = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
+        dragOffsetX = cX - rect.left;
+        dragOffsetY = cY - rect.top;
+      };
+      function drag(e) {
+        if (activeResize) {
+          e.preventDefault();
+          const dx = e.clientX - resizeStartX;
+          const dy = e.clientY - resizeStartY;
+          let newW = resizeStartWidth,
+            newH = resizeStartHeight,
+            newL = resizeStartLeft,
+            newT = resizeStartTop;
+          if (resizeDir.includes("e"))
+            newW = Math.max(300, resizeStartWidth + dx);
+          if (resizeDir.includes("s"))
+            newH = Math.max(200, resizeStartHeight + dy);
+          if (resizeDir.includes("w")) {
+            newW = Math.max(300, resizeStartWidth - dx);
+            newL = resizeStartLeft + (resizeStartWidth - newW);
+          }
+          if (resizeDir.includes("n")) {
+            newH = Math.max(200, resizeStartHeight - dy);
+            newT = resizeStartTop + (resizeStartHeight - newH);
+          }
+          activeResize.style.width = `${newW}px`;
+          activeResize.style.height = `${newH}px`;
+          if (resizeDir.includes("w")) activeResize.style.left = `${newL}px`;
+          if (resizeDir.includes("n")) activeResize.style.top = `${newT}px`;
+          return;
+        }
+        if (!isMouseDown || !activeDrag) return;
+        const cX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+        const cY = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
+        if (!hasDragged) {
+          hasDragged = true;
+          e.preventDefault();
+          if (
+            !activeDrag.classList.contains("os-window") &&
+            activeDrag.id !== "calendar-flyout"
+          ) {
+            activeDrag.style.zIndex = 9999;
+            activeDrag.classList.add("dragging");
+          }
+        }
+        if (hasDragged) {
+          activeDrag.style.left = `${cX - dragOffsetX}px`;
+          activeDrag.style.top = `${cY - dragOffsetY}px`;
+        }
+      }
+      function endDrag() {
+        if (activeResize) {
+          activeResize = null;
+          resizeDir = null;
+        }
+        if (activeDrag && activeDrag.classList.contains("desktop-icon")) {
+          activeDrag.classList.remove("dragging");
+          activeDrag.style.zIndex = "";
+        }
+        isMouseDown = false;
+        activeDrag = null;
+        hasDragged = false;
+      }
+      document.addEventListener("mousemove", drag);
+      document.addEventListener("mouseup", endDrag);
+      document.addEventListener("touchmove", drag, { passive: false });
+      document.addEventListener("touchend", endDrag);
+      function startIconDrag(e, el) {
+        e.stopPropagation();
+        window.startDrag(e, el);
+      }
+
+      window.openWindow = function (appId) {
+        let targetId = appId === "playlist" ? "youtube" : appId;
+        if (!runningApps.has(targetId)) {
+          runningApps.add(targetId);
+          window.renderTaskbar();
+        }
+        if (windows[targetId]) {
+          windows[targetId].classList.remove("window-minimized");
+          window.focusWindow(windows[targetId]);
+          return;
+        }
+
+        const app = appContent[targetId];
+        if (!app) return;
+        highestZ++;
+        const id = `window-${Date.now()}`;
+
+        let widthClass = "w-[350px]",
+          heightStyle = "height: 500px;",
+          extraClasses = "acrylic",
+          contentHTML = app.content || "";
+        const isVideo = targetId === "youtube",
+          isSocial = targetId === "github" || targetId === "instagram",
+          isItch = targetId === "itchio";
+        let widthPx = 350,
+          heightPx = 500;
+        if (isVideo || isItch) {
+          widthClass = "w-[640px] max-w-[90vw]";
+          heightStyle = isItch ? "height: 500px;" : "height: 400px;";
+          extraClasses = "acrylic-dark border-white/10";
+          contentHTML = "DYNAMIC";
+          widthPx = 640;
+          heightPx = isItch ? 500 : 360;
+        } else if (isSocial) {
+          widthClass = "w-[400px]";
+          heightStyle = "height: 600px;";
+          contentHTML = "DYNAMIC";
+          widthPx = 400;
+          heightPx = 600;
+        }
+
+        const startX = window.innerWidth / 2 - widthPx / 2,
+          startY = window.innerHeight / 2 - heightPx / 2;
+        const win = document.createElement("div");
+        win.id = id;
+        win.className = `os-window window-pop ${extraClasses} absolute rounded-xl ${widthClass} flex flex-col shadow-2xl transition-all duration-200 ease-out`;
+        win.style.zIndex = highestZ;
+        win.style.left = `${startX}px`;
+        win.style.top = `${startY}px`;
+        win.style.cssText += heightStyle;
+        win.onmousedown = () => window.focusWindow(win);
+        win.dataset.appid = targetId;
+
+        let headerHTML = `<div class="flex items-center gap-2 pointer-events-none"><i data-lucide="${app.icon}" class="w-4 h-4 ${app.color}"></i><span class="text-xs text-gray-300 font-semibold">${app.title}</span></div>`;
+        win.innerHTML = `<div class="window-header h-10 flex items-center justify-between px-4 border-b border-white/5 rounded-t-xl bg-white/5 select-none" onmousedown="window.startDrag(event, '${id}')" ontouchstart="window.startDrag(event, '${id}')" ondblclick="window.maximizeWindow(this.querySelector('.maximize-btn'))">${headerHTML}<div class="flex gap-2"><div onclick="window.minimizeWindow(this)" class="w-3 h-3 rounded-full bg-yellow-500/80 hover:bg-yellow-400 cursor-pointer flex items-center justify-center group"><i class="opacity-0 group-hover:opacity-100 text-black w-2 h-2" data-lucide="minus"></i></div><div onclick="window.maximizeWindow(this)" class="maximize-btn w-3 h-3 rounded-full bg-green-500/80 hover:bg-green-400 cursor-pointer flex items-center justify-center group"><i class="opacity-0 group-hover:opacity-100 text-black w-2 h-2" data-lucide="maximize-2"></i></div><div onclick="window.closeWindow(this)" class="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-400 cursor-pointer flex items-center justify-center group"><i class="opacity-0 group-hover:opacity-100 text-black w-2 h-2" data-lucide="x"></i></div></div></div><div id="content-${id}" class="flex-grow overflow-hidden relative w-full ${
+          isVideo ? "bg-[#0f0f0f]" : "h-full flex flex-col"
+        }">${
+          contentHTML === "DYNAMIC"
+            ? '<div class="p-4">Loading...</div>'
+            : contentHTML
+        }</div><div class="resizer se" onmousedown="window.startResize(event, '${id}', 'se')"></div>`;
+        document.getElementById("desktop-area").appendChild(win);
+        windows[targetId] = win;
+
+        if (targetId === "github") loadGithubContent(id);
+        if (targetId === "instagram") loadInstagramContent(id);
+        if (targetId === "itchio") loadItchioContent(id);
+        if (targetId === "youtube") {
+          if (appId === "youtube")
+            setTimeout(() => {
+              window.playVideoInWindow(id, videoPlaylist[0].id);
+            }, 100);
+          else window.loadPlaylistHome(id);
+        }
+        window.renderTaskbar();
+        lucide.createIcons();
+      };
+
+      // Init
+      window.onload = function () {
+        lucide.createIcons();
+        window.initDesktopIcons();
+        window.renderStartMenu();
+        window.bootTaskbar();
+        fetchGithubData();
+        fetchVideoMetadata();
+        generateCalendar(false);
+        // Inject Version Script
+        (function () {
+          const repo = "r12azqha/r12azqha.github.io";
+          const fetchDeploy = fetch(
+            `https://api.github.com/repos/${repo}/commits?per_page=1`
+          ).then((res) => {
+            const link = res.headers.get("Link");
+            if (link) {
+              const match = link.match(/page=(\d+)>; rel="last"/);
+              return match ? match[1] : "unknown";
+            }
+            return "???";
+          });
+          const fetchCommit = fetch(
+            `https://api.github.com/repos/${repo}/commits/main`
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              if (!data.sha)
+                return { hash: "unknown", date: new Date(), position: 0 };
+              const commitDate = new Date(data.commit.author.date);
+              return fetch(
+                `https://api.github.com/repos/${repo}/commits?since=${new Date(
+                  commitDate.getFullYear(),
+                  0,
+                  1
+                ).toISOString()}&until=${commitDate.toISOString()}`
+              )
+                .then((res) => res.json())
+                .then((allCommits) => {
+                  const year = commitDate.getFullYear();
+                  const week = Math.ceil(
+                    ((commitDate - new Date(commitDate.getFullYear(), 0, 1)) /
+                      86400000 +
+                      new Date(commitDate.getFullYear(), 0, 1).getDay() +
                       1) /
                       7
                   );
-                  return d.getFullYear() === year && w === week;
+                  const weekStr = String(week).padStart(2, "0");
+                  const sameWeekCommits = allCommits.filter((c) => {
+                    const d = new Date(c.commit.author.date);
+                    const w = Math.ceil(
+                      ((d - new Date(d.getFullYear(), 0, 1)) / 86400000 +
+                        new Date(d.getFullYear(), 0, 1).getDay() +
+                        1) /
+                        7
+                    );
+                    return d.getFullYear() === year && w === week;
+                  });
+                  const letter = String.fromCharCode(
+                    97 + (sameWeekCommits.length - 1)
+                  );
+                  return {
+                    hash: data.sha.substring(0, 7),
+                    date: commitDate,
+                    letter: letter,
+                  };
                 });
-
-                // Get letter based on position in same week
-                const letter = String.fromCharCode(
-                  97 + (sameWeekCommits.length - 1)
-                ); // 'a' for first commit
-                return {
-                  hash: data.sha.substring(0, 7),
-                  date: commitDate,
-                  letter: letter,
-                };
-              });
+            });
+          Promise.allSettled([fetchDeploy, fetchCommit]).then((results) => {
+            let deployNumber =
+              results[0].status === "fulfilled" ? results[0].value : "???";
+            let hashInfo =
+              results[1].status === "fulfilled"
+                ? results[1].value
+                : { hash: "LOCAL", date: new Date(), letter: "" };
+            let hash = hashInfo.hash;
+            let version = "";
+            try {
+              const commitDate = hashInfo.date;
+              const year = String(commitDate.getFullYear()).slice(-2);
+              const week = Math.ceil(
+                ((commitDate - new Date(commitDate.getFullYear(), 0, 1)) /
+                  86400000 +
+                  new Date(commitDate.getFullYear(), 0, 1).getDay() +
+                  1) /
+                  7
+              );
+              const weekStr = String(week).padStart(2, "0");
+              const letter = hashInfo.letter || "a";
+              version = `${year}w${weekStr}${letter}`;
+            } catch (e) {
+              version = "??w??";
+            }
+            let errorNote = "";
+            if (
+              results[0].status === "rejected" ||
+              results[1].status === "rejected"
+            ) {
+              errorNote = "failed to fetch the api! (╥﹏╥)";
+            }
+            document.getElementById("footer-info").innerHTML =
+              `DEPLOY: #${deployNumber} &bull; HASH: ${hash} &bull; VERSION: ${version}` +
+              (errorNote ? " &bull; " + errorNote : "");
           });
+        })();
+        setTimeout(() => {
+          setInterval(updateClock, 1000);
+        }, 3000);
+      };
 
-        Promise.allSettled([fetchDeploy, fetchCommit]).then((results) => {
-          let deployNumber =
-            results[0].status === "fulfilled" ? results[0].value : "???";
-          let hashInfo =
-            results[1].status === "fulfilled"
-              ? results[1].value
-              : { hash: "LOCAL", date: new Date(), letter: "" };
-          let hash = hashInfo.hash;
-
-          // Version format ZZwYY + letter
-          let version = "";
+      // Loaders...
+      function loadGithubContent(winId) {
+        const reposHTML = githubData.repos.length
+          ? githubData.repos
+              .map(
+                (repo) =>
+                  `<div class="bg-white/5 p-3 rounded border border-white/5 hover:border-white/20 hover:bg-white/10 cursor-pointer transition text-left" onclick="window.open('${
+                    repo.url || "#"
+                  }', '_blank')"><div class="flex justify-between items-center mb-1"><span class="font-bold text-blue-400 text-sm">${
+                    repo.name
+                  }</span></div><p class="text-xs text-gray-400 truncate">${
+                    repo.desc
+                  }</p></div>`
+              )
+              .join("")
+          : '<p class="text-sm p-4">Fetching repos...</p>';
+        document.getElementById(
+          `content-${winId}`
+        ).innerHTML = `<div class="text-left h-full flex flex-col w-full"><div class="flex items-center gap-4 p-6 border-b border-white/10 bg-white/5"><img src="${githubData.avatar}" class="w-16 h-16 rounded-full border-2 border-white/20 shadow-lg"><div><h2 class="text-xl font-bold flex items-center gap-2">${githubData.user} <a href="https://github.com/r12azqha" target="_blank" class="text-gray-400 hover:text-white"><i data-lucide="external-link" class="w-4 h-4"></i></a></h2><p class="text-gray-400 text-sm line-clamp-2">${githubData.bio}</p></div></div><div class="p-4 flex-grow overflow-auto custom-scrollbar space-y-2 w-full">${reposHTML}</div></div>`;
+        if (!githubData.repos.length)
+          fetchGithubData().then(() => loadGithubContent(winId));
+      }
+      function loadInstagramContent(winId) {
+        document.getElementById(
+          `content-${winId}`
+        ).innerHTML = `<div class="text-left h-full flex flex-col w-full"><div class="flex items-center gap-4 p-6 border-b border-white/10 bg-white/5"><div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500"><img src="${githubData.avatar}" class="w-full h-full rounded-full border-2 border-black object-cover"></div><div><h2 class="text-lg font-bold flex items-center gap-2">${instagramData.user} <a href="https://instagram.com/r12azqha" target="_blank" class="text-gray-400 hover:text-white"><i data-lucide="external-link" class="w-4 h-4"></i></a></h2><p class="text-xs text-gray-400">${instagramData.bio}</p></div></div><div class="grid grid-cols-3 gap-1 p-1 overflow-auto custom-scrollbar flex-grow flex items-center justify-center text-gray-500 text-sm">No posts loaded</div></div>`;
+      }
+      function loadItchioContent(winId) {
+        const gamesHTML = itchioData.games
+          .map(
+            (game) =>
+              `<div class="cursor-pointer group text-left relative overflow-hidden rounded-lg aspect-video bg-gray-800 border border-white/10 hover:border-red-400/50 transition-colors" onclick="window.open('${game.url}', '_blank')"><div class="absolute inset-0 ${game.color} opacity-30 group-hover:opacity-40 transition-opacity"></div><div class="absolute inset-0 flex flex-col justify-end p-3 bg-gradient-to-t from-black/90 to-transparent"><h3 class="font-bold text-sm text-white mb-0.5 line-clamp-1">${game.title}</h3><span class="text-[10px] text-gray-300 bg-white/10 px-1.5 py-0.5 rounded w-fit">${game.type}</span></div><i data-lucide="external-link" class="absolute top-2 right-2 w-4 h-4 text-white opacity-0 group-hover:opacity-100 transition-opacity"></i></div>`
+          )
+          .join("");
+        document.getElementById(
+          `content-${winId}`
+        ).innerHTML = `<div class="text-left h-full flex flex-col w-full"><div class="flex items-center gap-4 p-6 border-b border-white/10 bg-white/5"><img src="${githubData.avatar}" class="w-16 h-16 rounded-full border-2 border-white/20 shadow-lg"><div><h2 class="text-xl font-bold flex items-center gap-2">${itchioData.user} <a href="https://r12azqha.itch.io/" target="_blank" class="text-gray-400 hover:text-white"><i data-lucide="external-link" class="w-4 h-4"></i></a></h2><p class="text-gray-400 text-sm line-clamp-2">${itchioData.bio}</p></div></div><div class="p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 overflow-auto custom-scrollbar flex-grow w-full">${gamesHTML}</div></div>`;
+        lucide.createIcons();
+      }
+      window.playVideoInWindow = function (winId, videoId) {
+        document.getElementById(
+          `content-${winId}`
+        ).innerHTML = `<div class="w-full h-full flex flex-col bg-black relative"><div class="absolute top-2 left-2 z-50"><button onclick="window.loadPlaylistHome('${winId}')" class="bg-black/60 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-md border border-white/10 shadow-lg flex items-center gap-1 pr-3 group"><i data-lucide="arrow-left" class="w-5 h-5"></i> <span class="text-xs font-bold group-hover:text-white/90">Back</span></button></div><iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allowfullscreen></iframe></div>`;
+        lucide.createIcons();
+      };
+      async function fetchVideoMetadata() {
+        const promises = videoPlaylist.map(async (video) => {
+          if (video.title && video.thumb) return;
           try {
-            const commitDate = hashInfo.date;
-            const year = String(commitDate.getFullYear()).slice(-2);
-            const week = Math.ceil(
-              ((commitDate - new Date(commitDate.getFullYear(), 0, 1)) /
-                86400000 +
-                new Date(commitDate.getFullYear(), 0, 1).getDay() +
-                1) /
-                7
+            const res = await fetch(
+              `https://noembed.com/embed?url=https://www.youtube.com/watch?v=${video.id}`
             );
-            const weekStr = String(week).padStart(2, "0");
-            const letter = hashInfo.letter || "a";
-            version = `${year}w${weekStr}${letter}`;
+            const data = await res.json();
+            if (data.title) video.title = data.title;
+            video.thumb = `https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`;
           } catch (e) {
-            version = "??w??";
+            video.title = video.title || "Unknown Video";
+            video.thumb = `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`;
           }
-
-          let errorNote = "";
-          if (
-            results[0].status === "rejected" ||
-            results[1].status === "rejected"
-          ) {
-            errorNote = "failed to fetch the api! (╥﹏╥)";
-          }
-
-          document.getElementById("footer-info").innerHTML =
-            `DEPLOY: #${deployNumber} &bull; HASH: ${hash} &bull; VERSION: ${version}` +
-            (errorNote ? " &bull; " + errorNote : "");
         });
-      })();
-
-      // MacOS dock-like proximity scaling for social icons
-      (function () {
-        const iconLinks = Array.from(
-          document.querySelectorAll(".social-icons .dock-icon")
+        await Promise.all(promises);
+        const openWin = document.querySelector(
+          '.os-window[data-appid="youtube"]'
         );
-        const icons = iconLinks.map((link) => link.querySelector("svg"));
-        if (!icons.length) return;
-        const minScale = 1;
-        const midScale = 1.0;
-        const neighborScale = 1.1;
-        const maxScale = 1.5;
-        function handleMove(e) {
-          const mouseX = e.clientX;
-          let closestIdx = -1;
-          let minDist = Infinity;
-          icons.forEach((icon, i) => {
-            const rect = icon.getBoundingClientRect();
-            const iconX = rect.left + rect.width / 2;
-            const dist = Math.abs(mouseX - iconX);
-            if (dist < minDist) {
-              minDist = dist;
-              closestIdx = i;
-            }
-          });
-          icons.forEach((icon, i) => {
-            let scale = minScale;
-            let rotate = "";
-            if (i === closestIdx) {
-              scale = maxScale;
-              rotate = "rotate(5deg)";
-            } else if (i === closestIdx - 1 || i === closestIdx + 1) {
-              scale = neighborScale;
-            } else if (i === closestIdx - 2 || i === closestIdx + 2) {
-              scale = midScale;
-            }
-            icon.style.transform = `scale(${scale}) ${rotate}`;
-          });
+        if (
+          openWin &&
+          document
+            .getElementById(`content-${openWin.id}`)
+            .querySelector(".grid")
+        )
+          window.loadPlaylistHome(openWin.id);
+      }
+      window.loadPlaylistHome = function (winId) {
+        let items = videoPlaylist
+          .map(
+            (video, idx) =>
+              `<div class="cursor-pointer group text-left relative overflow-hidden rounded-lg aspect-video bg-gray-800 border border-white/10 hover:border-red-400/50 transition-colors" onclick="window.playVideoInWindow('${winId}', '${
+                video.id
+              }')"><div class="absolute inset-0 bg-gray-700"><img src="${
+                video.thumb ||
+                `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`
+              }" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity"></div><div class="absolute inset-0 flex flex-col justify-end p-3 bg-gradient-to-t from-black/90 to-transparent"><h3 class="font-bold text-sm text-white mb-0.5 line-clamp-2 text-shadow">${
+                video.title || "Loading..."
+              }</h3></div><div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><div class="bg-red-600/90 p-3 rounded-full backdrop-blur-sm shadow-lg transform scale-90 group-hover:scale-100 transition-transform"><i data-lucide="play" class="w-5 h-5 text-white fill-current"></i></div></div></div>`
+          )
+          .join("");
+        document.getElementById(
+          `content-${winId}`
+        ).innerHTML = `<div class="flex flex-col h-full text-left w-full"><div class="p-6 border-b border-white/10 bg-gradient-to-b from-red-900/20 to-transparent"><h2 class="text-2xl font-bold mb-1">YouTube</h2><p class="text-sm text-gray-400">My Playlist</p></div><div class="flex-grow overflow-auto custom-scrollbar p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 content-start w-full">${items}</div></div>`;
+        lucide.createIcons();
+      };
+      function generateCalendar(animate = true) {
+        const container = document.getElementById("calendar-days");
+        const firstDay = new Date(
+          displayDate.getFullYear(),
+          displayDate.getMonth(),
+          1
+        ).getDay();
+        const daysInMonth = new Date(
+          displayDate.getFullYear(),
+          displayDate.getMonth() + 1,
+          0
+        ).getDate();
+        let html = "";
+        for (let i = 0; i < firstDay; i++)
+          html += '<div class="calendar-day"></div>';
+        for (let i = 1; i <= daysInMonth; i++) {
+          const isToday =
+            new Date().getDate() === i &&
+            new Date().getMonth() === displayDate.getMonth() &&
+            new Date().getFullYear() === displayDate.getFullYear();
+          html += `<div class="calendar-day ${
+            isToday ? "today" : ""
+          }">${i}</div>`;
         }
-        function resetScale() {
-          icons.forEach((icon) => {
-            icon.style.transform = `scale(${minScale})`;
+        document.getElementById("cal-month-year").innerText =
+          displayDate.toLocaleDateString("en-US", {
+            month: "long",
+            year: "numeric",
           });
+        if (animate) {
+          container.style.opacity = "0";
+          container.style.transform = "translateY(10px)";
+          setTimeout(() => {
+            container.innerHTML = html;
+            container.style.transition =
+              "opacity 0.2s ease, transform 0.2s ease";
+            container.style.opacity = "1";
+            container.style.transform = "translateY(0)";
+          }, 150);
+        } else {
+          container.innerHTML = html;
         }
-        document
-          .querySelector(".social-icons")
-          .addEventListener("mousemove", handleMove);
-        document
-          .querySelector(".social-icons")
-          .addEventListener("mouseleave", resetScale);
-      })();
+      }
+      function updateClock() {
+        const now = new Date();
+        document.getElementById("clock-time").textContent =
+          now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        document.getElementById("clock-date").textContent =
+          now.toLocaleDateString();
+        const calTime = document.getElementById("cal-time-large");
+        const calDate = document.getElementById("cal-date-large");
+        if (calTime)
+          calTime.innerText = now.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false,
+          });
+        if (calDate) {
+          const options = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          };
+          calDate.innerText = now.toLocaleDateString("en-US", options);
+        }
+      }
+      async function fetchGithubData() {
+        try {
+          const [u, r] = await Promise.all([
+            fetch("https://api.github.com/users/r12azqha"),
+            fetch("https://api.github.com/users/r12azqha/repos"),
+          ]);
+          if (u.ok && r.ok) {
+            const ud = await u.json();
+            const rd = await r.json();
+            githubData.user = ud.login;
+            githubData.avatar = ud.avatar_url;
+            githubData.bio = ud.bio;
+            githubData.repos = rd.map((x) => ({
+              name: x.name,
+              desc: x.description,
+              url: x.html_url,
+            }));
+          }
+        } catch (e) {}
+      }
+
+      const selectionBox = document.getElementById("selection-box");
+      let isSelecting = false,
+        selectStartX,
+        selectStartY;
+      document
+        .getElementById("desktop-area")
+        .addEventListener("mousedown", (e) => {
+          if (
+            e.target.closest(".os-window") ||
+            e.target.closest(".desktop-icon") ||
+            e.target.closest("#taskbar") ||
+            e.target.closest("#start-menu") ||
+            e.target.closest("#context-menu") ||
+            e.target.closest("#calendar-flyout")
+          ) {
+            return;
+          }
+          document
+            .querySelectorAll(".desktop-icon")
+            .forEach((i) => i.classList.remove("selected"));
+          document.getElementById("context-menu").classList.add("hidden");
+          document.getElementById("start-menu").classList.add("hidden");
+          document.getElementById("calendar-flyout").classList.add("hidden");
+          isSelecting = true;
+          selectStartX = e.clientX;
+          selectStartY = e.clientY;
+          selectionBox.style.left = selectStartX + "px";
+          selectionBox.style.top = selectStartY + "px";
+          selectionBox.style.width = "0px";
+          selectionBox.style.height = "0px";
+          selectionBox.style.display = "block";
+        });
+      document.addEventListener("mousemove", (e) => {
+        if (isSelecting) {
+          const width = Math.abs(e.clientX - selectStartX);
+          const height = Math.abs(e.clientY - selectStartY);
+          selectionBox.style.width = width + "px";
+          selectionBox.style.height = height + "px";
+          selectionBox.style.left = Math.min(e.clientX, selectStartX) + "px";
+          selectionBox.style.top = Math.min(e.clientY, selectStartY) + "px";
+        }
+      });
+      document.addEventListener("mouseup", () => {
+        isSelecting = false;
+        selectionBox.style.display = "none";
+      });
+      const contextMenu = document.getElementById("context-menu");
+      document
+        .getElementById("desktop-area")
+        .addEventListener("contextmenu", (e) => {
+          if (e.target.closest(".os-window")) return;
+          e.preventDefault();
+          contextMenu.classList.remove("hidden");
+          let x = e.clientX,
+            y = e.clientY;
+          if (x + 200 > window.innerWidth) x -= 200;
+          if (y + 200 > window.innerHeight) y -= 200;
+          contextMenu.style.left = `${x}px`;
+          contextMenu.style.top = `${y}px`;
+          contextMenu.innerHTML = e.target.closest("#taskbar")
+            ? `<div class="context-item"><i data-lucide="settings-2" class="w-4 h-4"></i> Taskbar settings</div>`
+            : `<div class="context-item"><i data-lucide="layout-grid" class="w-4 h-4"></i> View</div><div class="context-item" onclick="location.reload()"><i data-lucide="refresh-cw" class="w-4 h-4"></i> Refresh</div>`;
+          lucide.createIcons();
+        });
+      document.addEventListener("click", (e) => {
+        contextMenu.classList.add("hidden");
+      });
     </script>
   </body>
 </html>

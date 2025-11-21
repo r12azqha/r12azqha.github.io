@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-FRM74ZC2TS"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-FRM74ZC2TS");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://raw.githubusercontent.com/r12azqha/r12azqha.github.io/main/docs/images/favicon.ico"
+    />
+
+    <title>@r_12k. | ✨ r12azqha Landing Page :3c</title>
+    <meta name="title" content="@r_12k. | ✨ r12azqha Landing Page :3c" />
+    <meta
+      name="description"
+      content="🍊 Yelloww! I am a Content Creator, Minecraft Animator, Graphics & Motion Designer, Game Developer, and more! 🎨🎮 (phew that was a lot..)"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://r12azqha.com" />
+    <meta
+      property="og:title"
+      content="@r_12k. | ✨ r12azqha Landing Page :3c"
+    />
+    <meta
+      property="og:description"
+      content="🍊 Yelloww! I am a Content Creator, Minecraft Animator, Graphics & Motion Designer, Game Developer, and more! 🎨🎮 (phew that was a lot..)"
+    />
+    <meta
+      property="og:image"
+      content="https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/bg1.png?raw=true"
+    />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://r12azqha.com" />
+    <meta
+      property="twitter:title"
+      content="@r_12k. | ✨ r12azqha Landing Page :3c"
+    />
+    <meta
+      property="twitter:description"
+      content="🍊 Yelloww! I am a Content Creator, Minecraft Animator, Graphics & Motion Designer, Game Developer, and more! 🎨🎮 (phew that was a lot..)"
+    />
+    <meta
+      property="twitter:image"
+      content="https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/bg1.png?raw=true"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Loading and Custom Config -->
+    <style>
+      /* Ensure the YouTube embed video container is correctly sized on mobile */
+      .video-container {
+        /* Prevents scrollbar flash on resize */
+        will-change: transform;
+      }
+
+      @font-face {
+        font-family: "FOT Seurat Pro";
+        src: url("https://raw.githubusercontent.com/r12azqha/r12azqha.github.io/main/docs/fonts/Arco.otf")
+          format("opentype");
+        font-weight: normal;
+      }
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap");
+    </style>
+
+    <script>
+      // MERGED CONFIG: Added darkMode:'class' to enable the grid's dark mode variant
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              main: ['"FOT Seurat Pro"', '"Montserrat"', "Arial", "sans-serif"],
+              mono: ['"JetBrains Mono"', '"Montserrat"', "monospace"],
+            },
+            colors: {
+              bgDark: "rgba(42, 25, 29, 0.7)",
+              textLight: "#e0d5d5",
+              orangeTitle: "#ffa54d",
+              btnYellow: "#fbc963",
+              btnHover: "#ffbe5c",
+              btnShadow: "#f99c37",
+              // --- SEPARATED COLORS ---
+              hrDividerColor: "#e0cfc6", // For the horizontal rule (hr)
+              frameOutlineColor: "#3D2329", // For the main window and button borders
+              // Removed original 'divider' color
+            },
+            transitionTimingFunction: {
+              "dock-bounce": "cubic-bezier(0.22, 1.5, 0.36, 1)",
+              "btn-bounce": "cubic-bezier(0.4, 0, 0.2, 1)",
+            },
+          },
+        },
+      };
+
+      // DARK MODE TOGGLE FUNCTION (Used to switch the background grid color)
+      function toggleDarkMode() {
+        document.documentElement.classList.toggle("dark");
+        const button = document.getElementById("mode-toggle-btn");
+        if (document.documentElement.classList.contains("dark")) {
+          button.textContent = "Light Mode";
+        } else {
+          button.textContent = "Dark Mode";
+        }
+      }
+    </script>
+  </head>
+
+  <body
+    class="h-screen w-screen m-0 p-0 overflow-y-auto md:overflow-hidden font-main text-textLight flex justify-center items-start md:items-center text-center relative min-h-screen min-w-[100vw] bg-cover bg-center bg-no-repeat bg-fixed"
+    style="
+      background-image: url('https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/bg1.png?raw=true');
+    "
+  >
+    <!-- THE GRID BACKGROUND ELEMENT -->
+    <div
+      class="-z-10 pointer-events-none absolute inset-0 select-none [background-size:40px_40px] [background-image:linear-gradient(to_right,#e5e5e5_1px,transparent_1px),linear-gradient(to_bottom,#e5e5e5_1px,transparent_1px)] dark:[background-image:linear-gradient(to_right,#27171B_1px,transparent_1px),linear-gradient(to_bottom,#27171B_1px,transparent_1px)]"
+    ></div>
+
+    <!-- DARK MODE TOGGLE BUTTON (Uses frameOutlineColor) -->
+    <button
+      id="mode-toggle-btn"
+      onclick="toggleDarkMode()"
+      class="fixed top-4 right-4 z-50 px-4 py-2 bg-white/10 backdrop-blur-sm text-textLight border border-frameOutlineColor border-opacity-30 rounded-full text-xs font-mono transition hover:bg-white/20 active:scale-95"
+    >
+      Light Mode
+    </button>
+
+    <!-- Glass Frame (Uses frameOutlineColor) -->
+    <div
+      class="bg-[#2A191D]/10 rounded-lg px-6 py-0 md:py-8 shadow-lg backdrop-blur-md border border-frameOutlineColor border-opacity-50 transition-all duration-300 w-full md:w-auto min-h-screen md:min-h-0"
+    >
+      <!-- Content Wrapper: Flex col on mobile, row on desktop -->
+      <div
+        class="flex flex-col md:flex-row items-center md:items-center gap-0 md:gap-5"
+      >
+        <!-- Video Container -->
+        <div
+          class="video-container flex-1 md:w-[500px] md:max-w-full md:aspect-video md:h-auto overflow-hidden relative md:translate-y-[5%] w-full aspect-video md:pb-0 md:static relative h-auto z-[20]"
+        >
+          <iframe
+            class="youtube-video absolute top-0 left-0 w-full h-full border-none md:static"
+            src="https://www.youtube.com/embed/I0jHbsidh1g?autoplay=1&mute=0&loop=1&playlist=I0jHbsidh1g"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <!-- Text Container -->
+        <div class="text-container flex-1 px-[15px] relative z-[1]">
+          <div class="w-full mt-5 md:mt-0">
+            <!-- INNER GRID: Split Text (Left) and Character (Right) -->
+            <div
+              class="flex flex-col md:flex-row items-center md:justify-center gap-6 w-full"
+            >
+              <!-- LEFT COLUMN: Text & Buttons -->
+              <div class="text-group flex flex-col items-center w-full">
+                <h1 class="text-5xl my-5 text-orangeTitle font-normal">
+                  r12azqha
+                </h1>
+
+                <div class="social-icons flex justify-center">
+                  <a
+                    class="dock-icon inline-block p-0 border-none bg-none no-underline text-transparent mx-[6px]"
+                    href="https://www.youtube.com/@r_12k.Incredibox"
+                    target="_blank"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="40"
+                      height="40"
+                      fill="#E0CFC6"
+                      class="bi bi-youtube transition-transform duration-[380ms] ease-dock-bounce w-[28px] h-[28px] md:w-[40px] md:h-[40px]"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"
+                      />
+                    </svg>
+                  </a>
+                  <a
+                    class="dock-icon inline-block p-0 border-none bg-none no-underline text-transparent mx-[6px]"
+                    href="https://r12azqha.itch.io/"
+                    target="_blank"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="40"
+                      width="40"
+                      fill="#E0CFC6"
+                      viewBox="0 0 245.371 220.736"
+                      class="transition-transform duration-[380ms] ease-dock-bounce w-[28px] h-[28px] md:w-[40px] md:h-[40px]"
+                    >
+                      <path
+                        d="M31.99 1.365C21.287 7.72.2 31.945 0 38.298v10.516C0 62.144 12.46 73.86 23.773 73.86c13.584 0 24.902-11.258 24.903-24.62 0 13.362 10.93 24.62 24.515 24.62 13.586 0 24.165-11.258 24.165-24.62 0 13.362 11.622 24.62 25.207 24.62h.246c13.586 0 25.208-11.258 25.208-24.62 0 13.362 10.58 24.62 24.164 24.62 13.585 0 24.515-11.258 24.515-24.62 0 13.362 11.32 24.62 24.903 24.62 11.313 0 23.773-11.714 23.773-25.046V38.298c-.2-6.354-21.287-30.58-31.988-36.933C180.118.197 157.056-.005 122.685 0c-34.37.003-81.228.54-90.697 1.365zm65.194 66.217a28.025 28.025 0 0 1-4.78 6.155c-5.128 5.014-12.157 8.122-19.906 8.122a28.482 28.482 0 0 1-19.948-8.126c-1.858-1.82-3.27-3.766-4.563-6.032l-.006.004c-1.292 2.27-3.092 4.215-4.954 6.037a28.5 28.5 0 0 1-19.948 8.12c-.934 0-1.906-.258-2.692-.528-1.092 11.372-1.553 22.24-1.716 30.164l-.002.045c-.02 4.024-.04 7.333-.06 11.93.21 23.86-2.363 77.334 10.52 90.473 19.964 4.655 56.7 6.775 93.555 6.788h.006c36.854-.013 73.59-2.133 93.554-6.788 12.883-13.14 10.31-66.614 10.52-90.474-.022-4.596-.04-7.905-.06-11.93l-.003-.045c-.162-7.926-.623-18.793-1.715-30.165-.786.27-1.757.528-2.692.528a28.5 28.5 0 0 1-19.948-8.12c-1.862-1.822-3.662-3.766-4.955-6.037l-.006-.004c-1.294 2.266-2.705 4.213-4.563 6.032a28.48 28.48 0 0 1-19.947 8.125c-7.748 0-14.778-3.11-19.906-8.123a28.025 28.025 0 0 1-4.78-6.155 27.99 27.99 0 0 1-4.736 6.155 28.49 28.49 0 0 1-19.95 8.124c-.27 0-.54-.012-.81-.02h-.007c-.27.008-.54.02-.813.02a28.49 28.49 0 0 1-19.95-8.123 27.992 27.992 0 0 1-4.736-6.155zm-20.486 26.49l-.002.01h.015c8.113.017 15.32 0 24.25 9.746 7.028-.737 14.372-1.105 21.722-1.094h.006c7.35-.01 14.694.357 21.723 1.094 8.93-9.747 16.137-9.73 24.25-9.746h.014l-.002-.01c3.833 0 19.166 0 29.85 30.007L210 165.244c8.504 30.624-2.723 31.373-16.727 31.4-20.768-.773-32.267-15.855-32.267-30.935-11.496 1.884-24.907 2.826-38.318 2.827h-.006c-13.412 0-26.823-.943-38.318-2.827 0 15.08-11.5 30.162-32.267 30.935-14.004-.027-25.23-.775-16.726-31.4L46.85 124.08C57.534 94.073 72.867 94.073 76.7 94.073zm45.985 23.582v.006c-.02.02-21.863 20.08-25.79 27.215l14.304-.573v12.474c0 .584 5.74.346 11.486.08h.006c5.744.266 11.485.504 11.485-.08v-12.474l14.304.573c-3.928-7.135-25.79-27.215-25.79-27.215v-.006l-.003.002z"
+                      />
+                    </svg>
+                  </a>
+                  <a
+                    class="dock-icon inline-block p-0 border-none bg-none no-underline text-transparent mx-[6px]"
+                    href="https://github.com/r12azqha/"
+                    target="_blank"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="40"
+                      height="40"
+                      fill="#E0CFC6"
+                      class="bi bi-github transition-transform duration-[380ms] ease-dock-bounce w-[28px] h-[28px] md:w-[40px] md:h-[40px]"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
+                      />
+                    </svg>
+                  </a>
+                  <a
+                    class="dock-icon inline-block p-0 border-none bg-none no-underline text-transparent mx-[6px]"
+                    href="mailto:business@r12azqha.com"
+                    target="_blank"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="40"
+                      height="40"
+                      fill="#E0CFC6"
+                      class="bi bi-discord transition-transform duration-[380ms] ease-dock-bounce w-[28px] h-[28px] md:w-[40px] md:h-[40px]"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"
+                      />
+                    </svg>
+                  </a>
+                  <a
+                    class="dock-icon inline-block p-0 border-none bg-none no-underline text-transparent mx-[6px]"
+                    href="https://www.instagram.com/r12azqha"
+                    target="_blank"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="40"
+                      height="40"
+                      fill="#E0CFC6"
+                      class="bi bi-instagram transition-transform duration-[380ms] ease-dock-bounce w-[28px] h-[28px] md:w-[40px] md:h-[40px]"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"
+                      />
+                    </svg>
+                  </a>
+                </div>
+
+                <!-- Divider (Uses hrDividerColor) -->
+                <hr
+                  class="h-px bg-hrDividerColor w-4/5 self-center my-[5px] border-none"
+                />
+
+                <!-- Buttons (Restored to previous logic, inside Left Column) -->
+                <div
+                  class="buttons flex flex-wrap justify-center gap-[15px] my-5 items-stretch w-full"
+                >
+                  <a
+                    href="https://www.youtube.com/@r_12k.Incredibox"
+                    target="_blank"
+                    class="bg-btnYellow px-[10px] py-[2px] text-white no-underline rounded-[5px] font-bold shadow-[5px_5px_#f99c37] transition-all duration-300 ease-btn-bounce flex-auto min-w-0 max-w-[125px] h-7 text-[12px] md:text-[11px] text-[clamp(8px,2vw,11px)] flex items-center justify-center overflow-hidden whitespace-nowrap text-ellipsis hover:bg-btnHover hover:text-white hover:rotate-[5deg] basis-[calc(50%-10px)] md:basis-[calc(33.33%-10px)]"
+                    >📺 YouTube</a
+                  >
+                  <a
+                    href="https://r12azqha.itch.io/"
+                    target="_blank"
+                    class="bg-btnYellow px-[10px] py-[2px] text-white no-underline rounded-[5px] font-bold shadow-[5px_5px_#f99c37] transition-all duration-300 ease-btn-bounce flex-auto min-w-0 max-w-[125px] h-7 text-[12px] md:text-[11px] text-[clamp(8px,2vw,11px)] flex items-center justify-center overflow-hidden whitespace-nowrap text-ellipsis hover:bg-btnHover hover:text-white hover:rotate-[5deg] basis-[calc(50%-10px)] md:basis-[calc(33.33%-10px)]"
+                    >🎮 Itch.io</a
+                  >
+                  <a
+                    href="https://github.com/r12azqha/"
+                    target="_blank"
+                    class="bg-btnYellow px-[10px] py-[2px] text-white no-underline rounded-[5px] font-bold shadow-[5px_5px_#f99c37] transition-all duration-300 ease-btn-bounce flex-auto min-w-0 max-w-[125px] h-7 text-[12px] md:text-[11px] text-[clamp(8px,2vw,11px)] flex items-center justify-center overflow-hidden whitespace-nowrap text-ellipsis hover:bg-btnHover hover:text-white hover:rotate-[5deg] basis-[calc(50%-10px)] md:basis-[calc(33.33%-10px)]"
+                    >💻 GitHub</a
+                  >
+                  <a
+                    href="mailto:business@r12azqha.com"
+                    target="_blank"
+                    class="bg-btnYellow px-[10px] py-[2px] text-white no-underline rounded-[5px] font-bold shadow-[5px_5px_#f99c37] transition-all duration-300 ease-btn-bounce flex-auto min-w-0 max-w-[125px] h-7 text-[12px] md:text-[11px] text-[clamp(8px,2vw,11px)] flex items-center justify-center overflow-hidden whitespace-nowrap text-ellipsis hover:bg-btnHover hover:text-white hover:rotate-[5deg] basis-[calc(50%-10px)] md:basis-[calc(33.33%-10px)]"
+                    >📩 Email</a
+                  >
+                  <a
+                    href="https://www.instagram.com/r12azqha/?hl=id"
+                    target="_blank"
+                    class="bg-btnYellow px-[10px] py-[2px] text-white no-underline rounded-[5px] font-bold shadow-[5px_5px_#f99c37] transition-all duration-300 ease-btn-bounce flex-auto min-w-0 max-w-[125px] h-7 text-[12px] md:text-[11px] text-[clamp(8px,2vw,11px)] flex items-center justify-center overflow-hidden whitespace-nowrap text-ellipsis hover:bg-btnHover hover:text-white hover:rotate-[5deg] basis-[calc(50%-10px)] md:basis-[calc(33.33%-10px)]"
+                    >📸 Socials</a
+                  >
+                </div>
+              </div>
+
+              <!-- RIGHT COLUMN: Character Image (Own Div) -->
+              <div class="character-container shrink-0 flex justify-center">
+                <a href="https://blockyfoxburo.github.io">
+                  <img
+                    src="https://github.com/r12azqha/r12azqha.github.io/blob/main/docs/images/20250924-instagram-rua.ngtenang-c.png?raw=true"
+                    alt="Character"
+                    class="character-image w-[150px]"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEW FOOTER SECTION -->
+    <div
+      class="footer absolute bottom-[15px] left-0 w-full text-center font-mono text-[10px] text-white/40 z-10 tracking-widest uppercase pointer-events-none pb-[10px] md:pb-0"
+      id="footer-info"
+    >
+      Deploy: Loading... &bull; Hash: ...
+    </div>
+
+    <script>
+      (function () {
+        const repo = "r12azqha/r12azqha.github.io";
+
+        const fetchDeploy = fetch(
+          `https://api.github.com/repos/${repo}/commits?per_page=1`
+        ).then((res) => {
+          const link = res.headers.get("Link");
+          if (link) {
+            const match = link.match(/page=(\d+)>; rel="last"/);
+            return match ? match[1] : "unknown";
+          }
+          return "???";
+        });
+
+        const fetchCommit = fetch(
+          `https://api.github.com/repos/${repo}/commits/main`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            if (!data.sha)
+              return { hash: "unknown", date: new Date(), position: 0 };
+            const commitDate = new Date(data.commit.author.date);
+
+            // Fetch commits of the same week to determine letter
+            return fetch(
+              `https://api.github.com/repos/${repo}/commits?since=${new Date(
+                commitDate.getFullYear(),
+                0,
+                1
+              ).toISOString()}&until=${commitDate.toISOString()}`
+            )
+              .then((res) => res.json())
+              .then((allCommits) => {
+                const year = commitDate.getFullYear();
+                const week = Math.ceil(
+                  ((commitDate - new Date(commitDate.getFullYear(), 0, 1)) /
+                    86400000 +
+                    new Date(commitDate.getFullYear(), 0, 1).getDay() +
+                    1) /
+                    7
+                );
+                const weekStr = String(week).padStart(2, "0");
+
+                // Filter commits in the same week
+                const sameWeekCommits = allCommits.filter((c) => {
+                  const d = new Date(c.commit.author.date);
+                  const w = Math.ceil(
+                    ((d - new Date(d.getFullYear(), 0, 1)) / 86400000 +
+                      new Date(d.getFullYear(), 0, 1).getDay() +
+                      1) /
+                      7
+                  );
+                  return d.getFullYear() === year && w === week;
+                });
+
+                // Get letter based on position in same week
+                const letter = String.fromCharCode(
+                  97 + (sameWeekCommits.length - 1)
+                ); // 'a' for first commit
+                return {
+                  hash: data.sha.substring(0, 7),
+                  date: commitDate,
+                  letter: letter,
+                };
+              });
+          });
+
+        Promise.allSettled([fetchDeploy, fetchCommit]).then((results) => {
+          let deployNumber =
+            results[0].status === "fulfilled" ? results[0].value : "???";
+          let hashInfo =
+            results[1].status === "fulfilled"
+              ? results[1].value
+              : { hash: "LOCAL", date: new Date(), letter: "" };
+          let hash = hashInfo.hash;
+
+          // Version format ZZwYY + letter
+          let version = "";
+          try {
+            const commitDate = hashInfo.date;
+            const year = String(commitDate.getFullYear()).slice(-2);
+            const week = Math.ceil(
+              ((commitDate - new Date(commitDate.getFullYear(), 0, 1)) /
+                86400000 +
+                new Date(commitDate.getFullYear(), 0, 1).getDay() +
+                1) /
+                7
+            );
+            const weekStr = String(week).padStart(2, "0");
+            const letter = hashInfo.letter || "a";
+            version = `${year}w${weekStr}${letter}`;
+          } catch (e) {
+            version = "??w??";
+          }
+
+          let errorNote = "";
+          if (
+            results[0].status === "rejected" ||
+            results[1].status === "rejected"
+          ) {
+            errorNote = "failed to fetch the api! (╥﹏╥)";
+          }
+
+          document.getElementById("footer-info").innerHTML =
+            `DEPLOY: #${deployNumber} &bull; HASH: ${hash} &bull; VERSION: ${version}` +
+            (errorNote ? " &bull; " + errorNote : "");
+        });
+      })();
+
+      // MacOS dock-like proximity scaling for social icons
+      (function () {
+        const iconLinks = Array.from(
+          document.querySelectorAll(".social-icons .dock-icon")
+        );
+        const icons = iconLinks.map((link) => link.querySelector("svg"));
+        if (!icons.length) return;
+        const minScale = 1;
+        const midScale = 1.0;
+        const neighborScale = 1.1;
+        const maxScale = 1.5;
+        function handleMove(e) {
+          const mouseX = e.clientX;
+          let closestIdx = -1;
+          let minDist = Infinity;
+          icons.forEach((icon, i) => {
+            const rect = icon.getBoundingClientRect();
+            const iconX = rect.left + rect.width / 2;
+            const dist = Math.abs(mouseX - iconX);
+            if (dist < minDist) {
+              minDist = dist;
+              closestIdx = i;
+            }
+          });
+          icons.forEach((icon, i) => {
+            let scale = minScale;
+            let rotate = "";
+            if (i === closestIdx) {
+              scale = maxScale;
+              rotate = "rotate(5deg)";
+            } else if (i === closestIdx - 1 || i === closestIdx + 1) {
+              scale = neighborScale;
+            } else if (i === closestIdx - 2 || i === closestIdx + 2) {
+              scale = midScale;
+            }
+            icon.style.transform = `scale(${scale}) ${rotate}`;
+          });
+        }
+        function resetScale() {
+          icons.forEach((icon) => {
+            icon.style.transform = `scale(${minScale})`;
+          });
+        }
+
+        const socialIconsContainer = document.querySelector(".social-icons");
+
+        // Check if the container exists before adding listeners
+        if (socialIconsContainer) {
+          socialIconsContainer.addEventListener("mousemove", handleMove);
+          socialIconsContainer.addEventListener("mouseleave", resetScale);
+        }
+
+        // Dark Mode Toggle Initialization (Set initial button text)
+        // NOTE: Since the 'dark' class is already on <html>, the button text defaults to 'Light Mode'.
+        const htmlElement = document.documentElement;
+        const button = document.getElementById("mode-toggle-btn");
+        if (button) {
+          if (htmlElement.classList.contains("dark")) {
+            button.textContent = "Light Mode";
+          } else {
+            button.textContent = "Dark Mode";
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
