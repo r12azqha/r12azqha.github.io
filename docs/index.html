@@ -41,6 +41,7 @@
         position: fixed;
         width: 100%;
         height: 100%;
+        cursor: default; /* Ensure body has default cursor */
       }
 
       /* Custom Scrollbar */
@@ -185,6 +186,7 @@
       .taskbar-item {
         transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
+        cursor: default;
       }
       .taskbar-item:hover {
         background-color: rgba(255, 255, 255, 0.1);
@@ -231,6 +233,7 @@
         border: 1px solid transparent;
         /* Ensure touches on icons don't scroll page */
         touch-action: none;
+        cursor: default;
       }
       .desktop-icon:hover {
         background-color: rgba(255, 255, 255, 0.1);
@@ -377,6 +380,7 @@
       /* CRITICAL: touch-action: none allows dragging without scrolling */
       .window-header {
         touch-action: none;
+        cursor: default !important; /* NO GRAB CURSOR */
       }
 
       /* Portrait Mode Adjustments for Taskbar */
@@ -405,6 +409,10 @@
           min-width: 2.5rem;
           min-height: 2.5rem;
         }
+        /* PUSH BUILD TEXT UP ON MOBILE */
+        #version-watermark {
+          bottom: 10rem !important;
+        }
       }
     </style>
   </head>
@@ -427,7 +435,7 @@
     <!-- Windows Version Watermark -->
     <div
       id="version-watermark"
-      class="absolute bottom-32 md:bottom-20 right-4 text-right pointer-events-none z-0 opacity-80 select-none"
+      class="absolute bottom-32 md:bottom-24 right-4 text-right pointer-events-none z-0 opacity-80 select-none"
     >
       <div class="text-white/60 text-sm font-medium font-sans">Winwowo 11</div>
       <div id="footer-info" class="text-white/60 text-xs font-sans">
@@ -983,15 +991,20 @@
             if (!child.classList.contains("app-exit")) {
               child.classList.add("app-exit");
               setTimeout(() => {
-                if (child.parentNode) child.remove();
+                if (child.parentNode && child.classList.contains("app-exit"))
+                  child.remove();
               }, 300);
             }
           }
         });
         currentPinnedIds.forEach((appId) => {
-          if (!document.getElementById(`icon-${appId}`)) {
+          const existingEl = document.getElementById(`icon-${appId}`);
+          if (!existingEl) {
             const el = buildIconElement(appId, true);
             pinnedContainer.appendChild(el);
+          } else if (existingEl.classList.contains("app-exit")) {
+            // Resurrection Logic for pinned apps (rare case but good to have)
+            existingEl.classList.remove("app-exit");
           }
         });
 
@@ -999,22 +1012,35 @@
         const currentRunningIds = Array.from(runningApps).filter(
           (id) => !pinnedTaskbarApps.includes(id)
         );
+
+        // Remove old ones
         Array.from(runningContainer.children).forEach((child) => {
           const id = child.id.replace("icon-", "");
           if (!currentRunningIds.includes(id)) {
             if (!child.classList.contains("app-exit")) {
               child.classList.add("app-exit");
               setTimeout(() => {
-                if (child.parentNode) child.remove();
-                window.updateDivider();
+                // Only remove if it is STILL supposed to exit
+                if (child.parentNode && child.classList.contains("app-exit")) {
+                  child.remove();
+                  window.updateDivider();
+                }
               }, 300);
             }
           }
         });
+
+        // Add new ones / Resurrect dead ones
         currentRunningIds.forEach((appId) => {
-          if (!document.getElementById(`icon-${appId}`)) {
+          const existingEl = document.getElementById(`icon-${appId}`);
+          if (!existingEl) {
             const el = buildIconElement(appId, true);
             runningContainer.appendChild(el);
+          } else {
+            // THE FIX: If it's currently dying, bring it back to life!
+            if (existingEl.classList.contains("app-exit")) {
+              existingEl.classList.remove("app-exit");
+            }
           }
         });
 
@@ -1188,27 +1214,14 @@
         const id = win.dataset.appid;
         win.style.opacity = "0";
         win.style.transform = "scale(0.95)";
-        const isPinned = pinnedTaskbarApps.includes(id);
+        // const isPinned = pinnedTaskbarApps.includes(id); // Removed complex logic
         setTimeout(() => {
           win.remove();
           if (id) {
             delete windows[id];
-            if (!isPinned) {
-              const icon = document.getElementById(`icon-${id}`);
-              if (icon) {
-                icon.classList.add("app-exit");
-                setTimeout(() => {
-                  runningApps.delete(id);
-                  window.renderTaskbar();
-                }, 300);
-              } else {
-                runningApps.delete(id);
-                window.renderTaskbar();
-              }
-            } else {
-              runningApps.delete(id);
-              window.renderTaskbar();
-            }
+            // Simplified closing logic: Just remove from data and let renderTaskbar handle the UI
+            runningApps.delete(id);
+            window.renderTaskbar();
           }
         }, 200);
       };
