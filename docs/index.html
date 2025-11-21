@@ -385,7 +385,7 @@
       id="version-watermark"
       class="absolute bottom-20 right-4 text-right pointer-events-none z-0 opacity-80 select-none"
     >
-      <div class="text-white/60 text-sm font-medium font-sans">Windows 11</div>
+      <div class="text-white/60 text-sm font-medium font-sans">Winwowo 11</div>
       <div id="footer-info" class="text-white/60 text-xs font-sans">
         Loading build info...
       </div>
@@ -713,6 +713,7 @@
         },
       ];
 
+      // --- EDITABLE VIDEO PLAYLIST (Just IDs) ---
       const videoPlaylist = [
         { id: "I0jHbsidh1g" },
         { id: "_UqGrwCbxVI" },
@@ -923,18 +924,30 @@
 
         if (!pinnedContainer || !runningContainer) return;
 
-        const existingIds = Array.from(runningContainer.children).map((c) =>
-          c.id.replace("icon-", "")
-        );
-        pinnedContainer.innerHTML = "";
-        pinnedTaskbarApps.forEach((appId) => {
-          pinnedContainer.appendChild(buildIconElement(appId, false));
+        // 1. Diffing Pinned Apps
+        const currentPinnedIds = pinnedTaskbarApps;
+        Array.from(pinnedContainer.children).forEach((child) => {
+          const id = child.id.replace("icon-", "");
+          if (!currentPinnedIds.includes(id)) {
+            if (!child.classList.contains("app-exit")) {
+              child.classList.add("app-exit");
+              setTimeout(() => {
+                if (child.parentNode) child.remove();
+              }, 300);
+            }
+          }
+        });
+        currentPinnedIds.forEach((appId) => {
+          if (!document.getElementById(`icon-${appId}`)) {
+            const el = buildIconElement(appId, true);
+            pinnedContainer.appendChild(el);
+          }
         });
 
+        // 2. Diffing Running Apps
         const currentRunningIds = Array.from(runningApps).filter(
           (id) => !pinnedTaskbarApps.includes(id)
         );
-
         Array.from(runningContainer.children).forEach((child) => {
           const id = child.id.replace("icon-", "");
           if (!currentRunningIds.includes(id)) {
@@ -947,7 +960,6 @@
             }
           }
         });
-
         currentRunningIds.forEach((appId) => {
           if (!document.getElementById(`icon-${appId}`)) {
             const el = buildIconElement(appId, true);
@@ -1050,6 +1062,7 @@
         const clock = document.getElementById("taskbar-clock");
         clock.classList.add("clock-slide");
         await new Promise((r) => setTimeout(r, 200));
+
         const pinnedContainer = document.getElementById("taskbar-pinned");
         pinnedContainer.innerHTML = "";
         for (const appId of pinnedTaskbarApps) {
@@ -1058,9 +1071,12 @@
           lucide.createIcons();
           await new Promise((r) => setTimeout(r, 100));
         }
+        // Auto open YouTube after boot
+        setTimeout(() => window.openWindow("youtube"), 800);
         booted = true;
       };
 
+      // ... (Toggle windows/calendar/start logic same as before) ...
       window.toggleStartMenu = function () {
         const menu = document.getElementById("start-menu");
         document.getElementById("calendar-flyout").classList.add("hidden");
@@ -1355,6 +1371,7 @@
         highestZ++;
         const id = `window-${Date.now()}`;
 
+        // Fullscreen fix: w-full, h-full, responsive grid
         let widthClass = "w-[350px]",
           heightStyle = "height: 500px;",
           extraClasses = "acrylic",
@@ -1526,7 +1543,7 @@
         }, 3000);
       };
 
-      // Loaders...
+      // Loaders... (Keep same logic for grid layout, ensure w-full on grid)
       function loadGithubContent(winId) {
         const reposHTML = githubData.repos.length
           ? githubData.repos
