@@ -16,7 +16,10 @@
     </script>
 
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <link
       rel="icon"
       type="image/x-icon"
@@ -33,6 +36,11 @@
         font-family: "Segoe UI", sans-serif;
         overflow: hidden;
         user-select: none;
+        /* Prevent elastic scrolling on mobile */
+        overscroll-behavior: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
       }
 
       /* Custom Scrollbar */
@@ -221,6 +229,8 @@
         gap: 4px;
         z-index: 10;
         border: 1px solid transparent;
+        /* Ensure touches on icons don't scroll page */
+        touch-action: none;
       }
       .desktop-icon:hover {
         background-color: rgba(255, 255, 255, 0.1);
@@ -362,6 +372,40 @@
         background-size: cover;
         background-position: center;
       }
+
+      /* --- MOBILE OPTIMIZATIONS --- */
+      /* CRITICAL: touch-action: none allows dragging without scrolling */
+      .window-header {
+        touch-action: none;
+      }
+
+      /* Portrait Mode Adjustments for Taskbar */
+      @media (max-width: 768px) {
+        #taskbar {
+          bottom: 5rem !important; /* Raises taskbar height/pos */
+          max-width: 95vw;
+          overflow-x: auto;
+          /* Hide scrollbar */
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        #taskbar::-webkit-scrollbar {
+          display: none;
+        }
+        #start-menu {
+          bottom: 9rem !important;
+          width: 90vw !important;
+          height: 60vh !important;
+        }
+        #calendar-flyout {
+          bottom: 9rem !important;
+        }
+        /* Make icons slightly easier to hit on mobile */
+        .taskbar-item {
+          min-width: 2.5rem;
+          min-height: 2.5rem;
+        }
+      }
     </style>
   </head>
   <body
@@ -383,9 +427,9 @@
     <!-- Windows Version Watermark -->
     <div
       id="version-watermark"
-      class="absolute bottom-20 right-4 text-right pointer-events-none z-0 opacity-80 select-none"
+      class="absolute bottom-32 md:bottom-20 right-4 text-right pointer-events-none z-0 opacity-80 select-none"
     >
-      <div class="text-white/60 text-sm font-medium font-sans">Burowo 11</div>
+      <div class="text-white/60 text-sm font-medium font-sans">Winwowo 11</div>
       <div id="footer-info" class="text-white/60 text-xs font-sans">
         Loading build info...
       </div>
@@ -419,7 +463,10 @@
         </button>
       </div>
       <!-- Dynamic Start Menu Grid -->
-      <div id="start-pinned-grid" class="grid grid-cols-6 gap-4 mb-8 px-2">
+      <div
+        id="start-pinned-grid"
+        class="grid grid-cols-4 md:grid-cols-6 gap-4 mb-8 px-2"
+      >
         <!-- Injected via JS -->
       </div>
 
@@ -432,7 +479,9 @@
         </button>
       </div>
 
-      <div class="grid grid-cols-2 gap-2 overflow-auto custom-scrollbar px-2">
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 gap-2 overflow-auto custom-scrollbar px-2"
+      >
         <div
           class="flex items-center gap-3 p-2 hover:bg-white/5 rounded cursor-pointer"
           onclick="window.openWindow('projects'); window.toggleStartMenu()"
@@ -514,6 +563,7 @@
       <div
         class="flex justify-between items-end border-b border-white/10 pb-2 cursor-default"
         onmousedown="window.startDrag(event, 'calendar-flyout')"
+        ontouchstart="window.startDrag(event, 'calendar-flyout')"
       >
         <div>
           <div
@@ -849,6 +899,7 @@
             el.classList.add("selected");
           };
           el.onmousedown = (e) => startIconDrag(e, el);
+          el.ontouchstart = (e) => startIconDrag(e, el);
           el.ondblclick = () => window.openWindow(icon.id);
           el.oncontextmenu = (e) => showTaskbarContext(e, icon.id);
           el.innerHTML = `<div class="w-10 h-10 ${icon.color} rounded-lg flex items-center justify-center shadow-lg mb-1 pointer-events-none"><i data-lucide="${icon.icon}" class="text-white w-6 h-6"></i></div><span class="text-xs text-shadow drop-shadow-md bg-black/20 px-1 rounded pointer-events-none line-clamp-2 leading-tight">${icon.label}</span>`;
@@ -1209,6 +1260,13 @@
         menu.classList.remove("hidden");
         let x = e.clientX;
         let y = e.clientY;
+
+        // Touch handling for context menu position
+        if (e.type === "touchstart") {
+          x = e.touches[0].clientX;
+          y = e.touches[0].clientY;
+        }
+
         if (e.target.closest("#taskbar")) {
           const iconRect = e.currentTarget.getBoundingClientRect();
           x = iconRect.left;
@@ -1255,8 +1313,14 @@
         if (!win) return;
         activeResize = win;
         resizeDir = direction;
-        resizeStartX = e.clientX;
-        resizeStartY = e.clientY;
+
+        // Handle both mouse and touch
+        const cX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+        const cY = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
+
+        resizeStartX = cX;
+        resizeStartY = cY;
+
         const rect = win.getBoundingClientRect();
         resizeStartWidth = rect.width;
         resizeStartHeight = rect.height;
@@ -1268,7 +1332,9 @@
         window.focusWindow(win);
       };
       window.startDrag = function (e, id) {
-        if (e.button !== 0) return;
+        // Allow touch start
+        if (e.type !== "touchstart" && e.button !== 0) return;
+
         let target = typeof id === "string" ? document.getElementById(id) : id;
         if (!target || target.classList.contains("window-maximized")) return;
         isMouseDown = true;
@@ -1287,10 +1353,14 @@
         dragOffsetY = cY - rect.top;
       };
       function drag(e) {
+        // Handle Resizing
         if (activeResize) {
           e.preventDefault();
-          const dx = e.clientX - resizeStartX;
-          const dy = e.clientY - resizeStartY;
+          const cX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+          const cY = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
+
+          const dx = cX - resizeStartX;
+          const dy = cY - resizeStartY;
           let newW = resizeStartWidth,
             newH = resizeStartHeight,
             newL = resizeStartLeft,
@@ -1313,12 +1383,19 @@
           if (resizeDir.includes("n")) activeResize.style.top = `${newT}px`;
           return;
         }
+
+        // Handle Dragging
         if (!isMouseDown || !activeDrag) return;
+
+        // Crucial for mobile: prevent scrolling while dragging window
+        if (e.type === "touchmove") e.preventDefault();
+
         const cX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
         const cY = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
+
         if (!hasDragged) {
           hasDragged = true;
-          e.preventDefault();
+          if (e.type !== "touchmove") e.preventDefault(); // prevent selection on desktop
           if (
             !activeDrag.classList.contains("os-window") &&
             activeDrag.id !== "calendar-flyout"
@@ -1345,10 +1422,13 @@
         activeDrag = null;
         hasDragged = false;
       }
+
+      // Event Listeners including Touch
       document.addEventListener("mousemove", drag);
       document.addEventListener("mouseup", endDrag);
-      document.addEventListener("touchmove", drag, { passive: false });
+      document.addEventListener("touchmove", drag, { passive: false }); // Passive false needed to preventDefault
       document.addEventListener("touchend", endDrag);
+
       function startIconDrag(e, el) {
         e.stopPropagation();
         window.startDrag(e, el);
@@ -1371,51 +1451,70 @@
         highestZ++;
         const id = `window-${Date.now()}`;
 
-        // Fullscreen fix: w-full, h-full, responsive grid
-        let widthClass = "w-[350px]",
-          heightStyle = "height: 500px;",
+        // Determine if mobile
+        const isMobile = window.innerWidth < 768;
+
+        // Responsive Window Logic
+        let widthClass = isMobile ? "w-[90vw]" : "w-[350px]",
+          heightStyle = isMobile ? "height: 60vh;" : "height: 500px;",
           extraClasses = "acrylic",
           contentHTML = app.content || "";
         const isVideo = targetId === "youtube",
           isSocial = targetId === "github" || targetId === "instagram",
           isItch = targetId === "itchio";
+
+        // Desktop sizes vs Mobile Overrides
         let widthPx = 350,
           heightPx = 500;
+
         if (isVideo || isItch) {
-          widthClass = "w-[640px] max-w-[90vw]";
-          heightStyle = isItch ? "height: 500px;" : "height: 400px;";
+          widthClass = isMobile ? "w-[95vw]" : "w-[640px] max-w-[90vw]";
+          heightStyle = isItch
+            ? isMobile
+              ? "height: 70vh;"
+              : "height: 500px;"
+            : isMobile
+            ? "height: 40vh;"
+            : "height: 400px;";
           extraClasses = "acrylic-dark border-white/10";
           contentHTML = "DYNAMIC";
           widthPx = 640;
           heightPx = isItch ? 500 : 360;
         } else if (isSocial) {
-          widthClass = "w-[400px]";
-          heightStyle = "height: 600px;";
+          widthClass = isMobile ? "w-[90vw]" : "w-[400px]";
+          heightStyle = isMobile ? "height: 70vh;" : "height: 600px;";
           contentHTML = "DYNAMIC";
           widthPx = 400;
           heightPx = 600;
         }
 
-        const startX = window.innerWidth / 2 - widthPx / 2,
-          startY = window.innerHeight / 2 - heightPx / 2;
+        // Center initially
+        const startX =
+          window.innerWidth / 2 -
+          (isMobile ? (window.innerWidth * 0.9) / 2 : widthPx / 2);
+        const startY =
+          window.innerHeight / 2 -
+          (isMobile ? (window.innerHeight * 0.6) / 2 : heightPx / 2);
+
         const win = document.createElement("div");
         win.id = id;
         win.className = `os-window window-pop ${extraClasses} absolute rounded-xl ${widthClass} flex flex-col shadow-2xl transition-all duration-200 ease-out`;
         win.style.zIndex = highestZ;
-        win.style.left = `${startX}px`;
-        win.style.top = `${startY}px`;
+        win.style.left = `${Math.max(10, startX)}px`; // Prevent off-screen left
+        win.style.top = `${Math.max(50, startY)}px`; // Prevent off-screen top
         win.style.cssText += heightStyle;
         win.onmousedown = () => window.focusWindow(win);
+        win.ontouchstart = () => window.focusWindow(win);
         win.dataset.appid = targetId;
 
         let headerHTML = `<div class="flex items-center gap-2 pointer-events-none"><i data-lucide="${app.icon}" class="w-4 h-4 ${app.color}"></i><span class="text-xs text-gray-300 font-semibold">${app.title}</span></div>`;
-        win.innerHTML = `<div class="window-header h-10 flex items-center justify-between px-4 border-b border-white/5 rounded-t-xl bg-white/5 select-none" onmousedown="window.startDrag(event, '${id}')" ontouchstart="window.startDrag(event, '${id}')" ondblclick="window.maximizeWindow(this.querySelector('.maximize-btn'))">${headerHTML}<div class="flex gap-2"><div onclick="window.minimizeWindow(this)" class="w-3 h-3 rounded-full bg-yellow-500/80 hover:bg-yellow-400 cursor-pointer flex items-center justify-center group"><i class="opacity-0 group-hover:opacity-100 text-black w-2 h-2" data-lucide="minus"></i></div><div onclick="window.maximizeWindow(this)" class="maximize-btn w-3 h-3 rounded-full bg-green-500/80 hover:bg-green-400 cursor-pointer flex items-center justify-center group"><i class="opacity-0 group-hover:opacity-100 text-black w-2 h-2" data-lucide="maximize-2"></i></div><div onclick="window.closeWindow(this)" class="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-400 cursor-pointer flex items-center justify-center group"><i class="opacity-0 group-hover:opacity-100 text-black w-2 h-2" data-lucide="x"></i></div></div></div><div id="content-${id}" class="flex-grow overflow-hidden relative w-full ${
+        win.innerHTML = `<div class="window-header h-10 flex items-center justify-between px-4 border-b border-white/5 rounded-t-xl bg-white/5 select-none cursor-grab" onmousedown="window.startDrag(event, '${id}')" ontouchstart="window.startDrag(event, '${id}')" ondblclick="window.maximizeWindow(this.querySelector('.maximize-btn'))">${headerHTML}<div class="flex gap-2"><div onclick="window.minimizeWindow(this)" class="w-3 h-3 rounded-full bg-yellow-500/80 hover:bg-yellow-400 cursor-pointer flex items-center justify-center group"><i class="opacity-0 group-hover:opacity-100 text-black w-2 h-2" data-lucide="minus"></i></div><div onclick="window.maximizeWindow(this)" class="maximize-btn w-3 h-3 rounded-full bg-green-500/80 hover:bg-green-400 cursor-pointer flex items-center justify-center group"><i class="opacity-0 group-hover:opacity-100 text-black w-2 h-2" data-lucide="maximize-2"></i></div><div onclick="window.closeWindow(this)" class="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-400 cursor-pointer flex items-center justify-center group"><i class="opacity-0 group-hover:opacity-100 text-black w-2 h-2" data-lucide="x"></i></div></div></div><div id="content-${id}" class="flex-grow overflow-hidden relative w-full ${
           isVideo ? "bg-[#0f0f0f]" : "h-full flex flex-col"
         }">${
           contentHTML === "DYNAMIC"
             ? '<div class="p-4">Loading...</div>'
             : contentHTML
-        }</div><div class="resizer se" onmousedown="window.startResize(event, '${id}', 'se')"></div>`;
+        }</div><div class="resizer se" onmousedown="window.startResize(event, '${id}', 'se')" ontouchstart="window.startResize(event, '${id}', 'se')"></div>`;
         document.getElementById("desktop-area").appendChild(win);
         windows[targetId] = win;
 
@@ -1778,6 +1877,13 @@
           contextMenu.classList.remove("hidden");
           let x = e.clientX,
             y = e.clientY;
+
+          // Touch context menu position
+          if (e.type === "touchstart") {
+            x = e.touches[0].clientX;
+            y = e.touches[0].clientY;
+          }
+
           if (x + 200 > window.innerWidth) x -= 200;
           if (y + 200 > window.innerHeight) y -= 200;
           contextMenu.style.left = `${x}px`;
