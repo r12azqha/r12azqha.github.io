@@ -694,8 +694,12 @@
         "🍊 Yelloww! I am a Content Creator, Minecraft Animator, Graphics & Motion Designer, Game Developer, and more! 🎨🎮 (phew that was a lot..)";
       let highestZ = 100;
       let activeDrag = null;
-      let dragOffsetX = 0,
-        dragOffsetY = 0;
+      // DRAG LOGIC CHANGED: We now use start positions and deltas
+      let dragStartX = 0,
+        dragStartY = 0; // Where the finger started
+      let initialWindowX = 0,
+        initialWindowY = 0; // Where the window started
+
       let isMouseDown = false;
       let hasDragged = false;
 
@@ -781,28 +785,12 @@
         { id: "e3L1PIY1bnE" },
       ];
 
-      // --- FALLBACK DATA FOR OFFLINE/RATE LIMIT ---
+      // --- DYNAMIC GITHUB DATA ---
       let githubData = {
         user: "r12azqha",
         avatar: "https://github.com/r12azqha.png",
         bio: "GitHub User",
-        repos: [
-          {
-            name: "r12azqha.github.io",
-            desc: "My personal landing page OS",
-            url: "https://github.com/r12azqha/r12azqha.github.io",
-          },
-          {
-            name: "No-Pain-No-Gain",
-            desc: "Visual Novel Project",
-            url: "https://github.com/r12azqha",
-          },
-          {
-            name: "Project-Firefly",
-            desc: "Web Game Experiment",
-            url: "https://github.com/r12azqha",
-          },
-        ],
+        repos: [],
         contributions: [],
       };
       const instagramData = {
@@ -1395,16 +1383,22 @@
         if (target.style) target.style.transition = "none";
 
         if (target.classList.contains("os-window")) window.focusWindow(target);
-        const rect = target.getBoundingClientRect();
-        target.style.transform = "none";
-        target.style.right = "auto";
-        target.style.bottom = "auto";
-        target.style.left = rect.left + "px";
-        target.style.top = rect.top + "px";
+
+        // --- DELTA LOGIC FIX ---
+        // Instead of re-calculating style.top based on getBoundingClientRect (which fails on Firefox Mobile)
+        // We capture the CURRENT finger position and the CURRENT window position.
+        // Movement will be calculated as: NewPos = OldPos + (CurrentFinger - StartFinger)
+
         const cX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
         const cY = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
-        dragOffsetX = cX - rect.left;
-        dragOffsetY = cY - rect.top;
+
+        dragStartX = cX;
+        dragStartY = cY;
+
+        // Capture initial window position safely (using offsetLeft/Top relative to parent)
+        // We use parseInt to strip 'px' and fallback to 0 if unset
+        initialWindowX = parseInt(target.style.left) || 0;
+        initialWindowY = parseInt(target.style.top) || 0;
       };
       function drag(e) {
         // Handle Resizing
@@ -1459,8 +1453,12 @@
           }
         }
         if (hasDragged) {
-          activeDrag.style.left = `${cX - dragOffsetX}px`;
-          activeDrag.style.top = `${cY - dragOffsetY}px`;
+          // DELTA CALCULATION
+          const deltaX = cX - dragStartX;
+          const deltaY = cY - dragStartY;
+
+          activeDrag.style.left = `${initialWindowX + deltaX}px`;
+          activeDrag.style.top = `${initialWindowY + deltaY}px`;
         }
       }
       function endDrag() {
