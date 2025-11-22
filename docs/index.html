@@ -42,6 +42,7 @@
         width: 100%;
         height: 100%;
         cursor: default; /* Ensure body has default cursor */
+        background-color: #000; /* Fallback color */
       }
 
       /* Custom Scrollbar */
@@ -780,11 +781,28 @@
         { id: "e3L1PIY1bnE" },
       ];
 
+      // --- FALLBACK DATA FOR OFFLINE/RATE LIMIT ---
       let githubData = {
         user: "r12azqha",
         avatar: "https://github.com/r12azqha.png",
         bio: "GitHub User",
-        repos: [],
+        repos: [
+          {
+            name: "r12azqha.github.io",
+            desc: "My personal landing page OS",
+            url: "https://github.com/r12azqha/r12azqha.github.io",
+          },
+          {
+            name: "No-Pain-No-Gain",
+            desc: "Visual Novel Project",
+            url: "https://github.com/r12azqha",
+          },
+          {
+            name: "Project-Firefly",
+            desc: "Web Game Experiment",
+            url: "https://github.com/r12azqha",
+          },
+        ],
         contributions: [],
       };
       const instagramData = {
@@ -1372,6 +1390,10 @@
         isMouseDown = true;
         hasDragged = false;
         activeDrag = target;
+
+        // FIX: Disable transition while dragging to prevent "offset/laggy" feel
+        if (target.style) target.style.transition = "none";
+
         if (target.classList.contains("os-window")) window.focusWindow(target);
         const rect = target.getBoundingClientRect();
         target.style.transform = "none";
@@ -1446,9 +1468,14 @@
           activeResize = null;
           resizeDir = null;
         }
-        if (activeDrag && activeDrag.classList.contains("desktop-icon")) {
-          activeDrag.classList.remove("dragging");
-          activeDrag.style.zIndex = "";
+        if (activeDrag) {
+          // FIX: Restore transition for smooth open/close/maximize later
+          if (activeDrag.style) activeDrag.style.transition = "";
+
+          if (activeDrag.classList.contains("desktop-icon")) {
+            activeDrag.classList.remove("dragging");
+            activeDrag.style.zIndex = "";
+          }
         }
         isMouseDown = false;
         activeDrag = null;
