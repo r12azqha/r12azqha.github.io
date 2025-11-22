@@ -976,71 +976,90 @@
         lucide.createIcons();
       };
 
+      // --- FIXED TASKBAR RENDERING (MOVES NODES instead of destroying them) ---
       window.renderTaskbar = function () {
         const pinnedContainer = document.getElementById("taskbar-pinned");
         const runningContainer = document.getElementById("taskbar-running");
-        const divider = document.getElementById("running-apps-divider");
 
         if (!pinnedContainer || !runningContainer) return;
 
-        // 1. Diffing Pinned Apps
+        // 1. Handle Pinned Apps
         const currentPinnedIds = pinnedTaskbarApps;
-        Array.from(pinnedContainer.children).forEach((child) => {
-          const id = child.id.replace("icon-", "");
-          if (!currentPinnedIds.includes(id)) {
-            if (!child.classList.contains("app-exit")) {
-              child.classList.add("app-exit");
-              setTimeout(() => {
-                if (child.parentNode && child.classList.contains("app-exit"))
-                  child.remove();
-              }, 300);
-            }
-          }
-        });
+
         currentPinnedIds.forEach((appId) => {
-          const existingEl = document.getElementById(`icon-${appId}`);
-          if (!existingEl) {
-            const el = buildIconElement(appId, true);
+          let el = document.getElementById(`icon-${appId}`);
+
+          if (!el) {
+            el = buildIconElement(appId, true);
             pinnedContainer.appendChild(el);
-          } else if (existingEl.classList.contains("app-exit")) {
-            // Resurrection Logic for pinned apps (rare case but good to have)
-            existingEl.classList.remove("app-exit");
+          } else if (el.parentElement !== pinnedContainer) {
+            // Move to pinned container if it was in running
+            pinnedContainer.appendChild(el);
+            // Reset animation for smooth 'pop' effect on move
+            el.classList.remove("taskbar-pop");
+            void el.offsetWidth;
+            el.classList.add("taskbar-pop");
           }
+          el.classList.remove("app-exit");
         });
 
-        // 2. Diffing Running Apps
+        // 2. Handle Running Apps (not pinned)
         const currentRunningIds = Array.from(runningApps).filter(
           (id) => !pinnedTaskbarApps.includes(id)
         );
 
-        // Remove old ones
-        Array.from(runningContainer.children).forEach((child) => {
+        currentRunningIds.forEach((appId) => {
+          let el = document.getElementById(`icon-${appId}`);
+
+          if (!el) {
+            el = buildIconElement(appId, true);
+            runningContainer.appendChild(el);
+          } else if (el.parentElement !== runningContainer) {
+            // Move to running container if it was pinned
+            runningContainer.appendChild(el);
+            el.classList.remove("taskbar-pop");
+            void el.offsetWidth;
+            el.classList.add("taskbar-pop");
+          }
+          el.classList.remove("app-exit");
+        });
+
+        // 3. Cleanup Pinned
+        Array.from(pinnedContainer.children).forEach((child) => {
           const id = child.id.replace("icon-", "");
-          if (!currentRunningIds.includes(id)) {
-            if (!child.classList.contains("app-exit")) {
-              child.classList.add("app-exit");
-              setTimeout(() => {
-                // Only remove if it is STILL supposed to exit
-                if (child.parentNode && child.classList.contains("app-exit")) {
-                  child.remove();
-                  window.updateDivider();
-                }
-              }, 300);
-            }
+          if (
+            !currentPinnedIds.includes(id) &&
+            !child.classList.contains("app-exit")
+          ) {
+            child.classList.add("app-exit");
+            setTimeout(() => {
+              if (
+                child.parentNode === pinnedContainer &&
+                child.classList.contains("app-exit")
+              ) {
+                child.remove();
+              }
+            }, 300);
           }
         });
 
-        // Add new ones / Resurrect dead ones
-        currentRunningIds.forEach((appId) => {
-          const existingEl = document.getElementById(`icon-${appId}`);
-          if (!existingEl) {
-            const el = buildIconElement(appId, true);
-            runningContainer.appendChild(el);
-          } else {
-            // THE FIX: If it's currently dying, bring it back to life!
-            if (existingEl.classList.contains("app-exit")) {
-              existingEl.classList.remove("app-exit");
-            }
+        // 4. Cleanup Running
+        Array.from(runningContainer.children).forEach((child) => {
+          const id = child.id.replace("icon-", "");
+          if (
+            !currentRunningIds.includes(id) &&
+            !child.classList.contains("app-exit")
+          ) {
+            child.classList.add("app-exit");
+            setTimeout(() => {
+              if (
+                child.parentNode === runningContainer &&
+                child.classList.contains("app-exit")
+              ) {
+                child.remove();
+                window.updateDivider();
+              }
+            }, 300);
           }
         });
 
